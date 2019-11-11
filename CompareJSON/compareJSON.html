@@ -1,0 +1,56 @@
+<html>
+
+<head>
+  <title>Compare objects</title>
+</head>
+
+<body>
+  <script type='text/javascript'>
+    async function compareObjects(obj1, obj2) {
+
+      if (obj1 instanceof Object && obj2 instanceof Object) {
+
+        const keys1 = Object.keys(obj1);
+        const keys2 = Object.keys(obj2);
+        for (let k = 0; k < keys1.length; k++) {
+          if (keys2.indexOf(keys1[k]) === -1) {
+
+            return false;
+          }
+        }
+        for (let k = 0; k < keys2.length; k++) {
+          if (keys1.indexOf(keys2[k]) === -1) {
+            return false;
+          }
+        }
+        for (let k = 0; k < keys1.length; k++) {
+          if (obj1[keys1[k]] instanceof Object) {
+            if (!await compareObjects(obj1[keys1[k]], obj2[keys1[k]])) {
+              return false;
+            }
+          } else {
+            if (obj1[keys1[k]] !== obj2[keys1[k]]) {
+              return false;
+            }
+          }
+        }
+        return true;
+      } else {
+        return obj1 === obj2;
+      }
+    }
+
+    // Example: ([{k: 1}, {k: 1}, {k: 1}])
+    //   -----> true
+    async function compareNObjects(objects) {
+      for (let k = 0; k < objects.length - 1; k++) {
+        if (!await compareObjects(objects[k], objects[k + 1])) {
+          return false;
+        }
+      }
+      return true;
+    };
+  </script>
+</body>
+
+</html>
