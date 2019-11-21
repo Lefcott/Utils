@@ -1,0 +1,137 @@
+<html>
+    <style>
+    textarea{
+        position: absolute;
+        width: 50%;
+        height: 400px;
+        top: 0;
+    }
+    #text{
+        left: 0;
+    }
+    #result{
+        left: 50%;
+    }
+    input[type=button]{
+        width: 200px;
+        height: 40px;
+        font-size: 25px;
+        position: absolute;
+        transform: translate(-50%);
+    }
+    #parse{
+        left: 50%;
+        top: 410px;
+    }
+    #parse2{
+        left: 50%;
+        top: 460px;
+    }
+    #parse3{
+        left: 50%;
+        top: 510px;
+    }
+    #parse4{
+        left: 50%;
+        top: 560px;
+    }
+    #parse5{
+        left: 50%;
+        top: 610px;
+    }
+    body{
+        overflow: hidden;
+    }
+    </style>
+    <body>
+        <textarea id = "text"></textarea>
+        <textarea id = "result"></textarea>
+        <input type = "text" id = "excludes" value = " |">
+        <input  type = "button" onclick = "parse();" value = "Parse" id = "parse">
+        <input  type = "button" onclick = "parse2();" value = "Messages" id = "parse2">
+        <input  type = "button" onclick = "parse3();" value = "Parse 3" id = "parse3">
+        <input  type = "button" onclick = "parse4();" value = "'export' to 'echo'" id = "parse4">
+        <input  type = "button" onclick = "parse5();" value = "parse5" id = "parse5">
+        <script type = "text/javascript">
+            var charChecks = [
+                "{['\"[",
+                "]\"']}",
+            ];
+            document.getElementById('text').value = "Test message number " + charChecks[0] + "5" + charChecks[1]
+            function parse(){
+                var text = document.getElementById("text");
+                var excludes = document.getElementById("excludes").value.split("");
+                var result = 
+                    text.value.split("\n").map(line => {
+                        return "'" + exclude(line, excludes) + "',\n";
+                    }).join("");
+                document.getElementById("result").value = "(" + result.substring(0, result.length - 2) + ")";
+            }
+            function exclude(str, excludes){
+                var newStr = "";
+                for(let k = 0; k < str.length; k++){
+                    newStr += excludes.indexOf(str[k]) == -1 ? str[k] : "";
+                }
+                return newStr;
+            }
+            function parse2(){
+                var text = document.getElementById("text");
+                var result = "[";
+                var previous = text.value.substring(0, text.value.indexOf(charChecks[0]));
+                var next = text.value.substring(text.value.indexOf(charChecks[1]) + charChecks[1].length);
+                var upTo = parseInt(text.value.substring(text.value.indexOf(charChecks[0]) + charChecks[0].length, text.value.indexOf(charChecks[1])));
+                for(var a = 1; a <= upTo; a++){
+                    result += '\n        ' + previous + a + next + ',';
+                }
+                document.getElementById("result").value = result.substring(0, result.length - 1) + "\n    ]";
+            }
+            function parse3(){
+                var text = document.getElementById("text");
+                text.value = text.value[text.value.length - 1] == "\n" ? text.value.substring(0, text.value.length - 1) : text.value;
+                var result = "[\n" +
+                    text.value.split("\n").map(line => {
+                        return '        "' + replaceAll(replaceAll(line, ["\\", "\\\\"]), ['"', '\\"']) + '",\n';
+                    }).join("");
+                document.getElementById("result").value = result.substring(0, result.length - 2) + "\n    ]";
+            }
+            function parse4(){
+                var text = document.getElementById("text");
+                var result = text.value.split("\n").map(line => {
+                    return ignoreAfter(replaceAllStr(line, ["export ", "echo $"]), "=");
+                }).join("\n");
+                document.getElementById("result").value = result + "\n";
+            }
+            function parse5(){
+                var text = document.getElementById("text");
+                var result = text.value.split("\n").map(line => {
+                    var key = line.substring(line.indexOf(" ") + 1, line.indexOf("="));
+                    return "export " + key + "=$" + key;
+                }).join("\n");
+                document.getElementById("result").value = result + "\n";
+            }
+            function replaceAll(str, replace){
+                var newStr = "";
+                for(let k = 0; k < str.length; k++){
+                    newStr += str[k] == replace[0] ? replace[1] : str[k];
+                }
+                return newStr;
+            }
+            function replaceAllStr(str, replace){
+                while(str.indexOf(replace[0]) != -1){
+                    str = str.replace(replace[0], replace[1]);
+                }
+                return str;
+            }
+            function ignoreAfter(str, after){
+                var newStr = "";
+                for(var k = 0; str.length; k++){
+                    if(str[k] == after){
+                        break;
+                    }
+                    newStr += str[k];
+                }
+                return newStr;
+            }
+        </script>
+    </body>
+</html>
