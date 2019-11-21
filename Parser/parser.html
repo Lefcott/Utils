@@ -172,6 +172,38 @@
                 }
                 return newStr;
             }
+/*
+// MONGO DB QUERY 1
+var info = db.getCollection('chatbots').find({}, {
+        'code': 1,
+        'name': 1,
+        '_id': 0
+}).toArray();
+var mapping = {};
+for (var k = 0; k < info.length; k++) {
+    mapping[info[k].name] = info[k].code;
+}
+mapping
+// --------------------------------------------------------
+// MONGO DB QUERY 2
+var mapping = {
+    "Edelap-Institucional-Web" : "87d1k1ar",
+    "Eden-Institucional-Web" : "qgvbf5z1",
+    "Widergy-Institucional" : "6tLxGH4F",
+    "Edes-Institucional-Web" : "08me17zh",
+    "Camuzzi-Institucional-Web" : "57ts1tb6",
+    "Edenor-Institucional-Web" : "mj30wngk"
+};
+var keys = Object.keys(mapping);
+for (var k = 0; k < keys.length; k++) {
+    db.getCollection('analytics').updateMany(
+        { 'chatbotName': keys[k] },
+        {
+            $set: { 'chatbotCode': mapping[keys[k]] }
+        }
+    );
+}
+*/
         </script>
     </body>
 </html>
