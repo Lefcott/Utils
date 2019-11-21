@@ -3,7 +3,7 @@
     textarea{
         position: absolute;
         width: 50%;
-        height: 400px;
+        height: 370px;
         top: 0;
     }
     #text{
@@ -21,26 +21,31 @@
     }
     #parse{
         left: 50%;
-        top: 410px;
+        top: 380px;
     }
     #parse2{
         left: 50%;
-        top: 460px;
+        top: 430px;
     }
     #parse3{
         left: 50%;
-        top: 510px;
+        top: 480px;
     }
     #parse4{
         left: 50%;
-        top: 560px;
+        top: 530px;
     }
     #parse5{
         left: 50%;
-        top: 610px;
+        top: 580px;
+    }
+    #parse6{
+        left: 50%;
+        top: 630px;
     }
     body{
-        overflow: hidden;
+        overflow-x: hidden;
+        overflow-y: scroll;
     }
     </style>
     <body>
@@ -52,6 +57,7 @@
         <input  type = "button" onclick = "parse3();" value = "Parse 3" id = "parse3">
         <input  type = "button" onclick = "parse4();" value = "'export' to 'echo'" id = "parse4">
         <input  type = "button" onclick = "parse5();" value = "parse5" id = "parse5">
+        <input  type = "button" onclick = "parse6();" value = "Get Analytics" id = "parse6">
         <script type = "text/javascript">
             var charChecks = [
                 "{['\"[",
@@ -108,6 +114,40 @@
                     return "export " + key + "=$" + key;
                 }).join("\n");
                 document.getElementById("result").value = result + "\n";
+            }
+            function parse6(){
+                const text = document.getElementById("text");
+                const messages = JSON.parse(text.value);
+                const analytics = {};
+                const analyticsCollection = [];
+                for (let k = 0; k < messages.length; k++) {
+                    if (messages[k].analytics) {
+                        const category = messages[k].analytics.googleAnalyticsClient.categoryEvent;
+                        const action = messages[k].analytics.googleAnalyticsClient.actionEvent;
+                        const chatbotName = messages[k].chatbotName;
+                        if (!analytics[chatbotName]) {
+                            analytics[chatbotName] = {};
+                        }
+                        if (!analytics[chatbotName][category]) {
+                            analytics[chatbotName][category] = [];
+                        }
+                        if (!analytics[chatbotName][category].includes(action)) {
+                            analytics[chatbotName][category].push(action);
+                        }
+                    }
+                }
+                const chatbotNames = Object.keys(analytics);
+                for (let k = 0; k < chatbotNames.length; k++) {
+                    const categoryNames = Object.keys(analytics[chatbotNames[k]]);
+                    for (let m = 0; m < categoryNames.length; m++) {
+                        analyticsCollection.push({
+                            chatbotName: chatbotNames[k],
+                            categoryEvent: categoryNames[m],
+                            actionEvents: analytics[chatbotNames[k]][categoryNames[m]]
+                        });
+                    }
+                }
+                document.getElementById("result").value = JSON.stringify(analyticsCollection);
             }
             function replaceAll(str, replace){
                 var newStr = "";
