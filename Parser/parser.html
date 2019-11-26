@@ -47,6 +47,14 @@
         left: 50%;
         top: 680px;
     }
+    #parse8{
+        left: 50%;
+        top: 680px;
+    }
+    #parse9{
+        left: 50%;
+        top: 730px;
+    }
     body{
         overflow-x: hidden;
         overflow-y: scroll;
@@ -63,6 +71,8 @@
         <input  type = "button" onclick = "parse5();" value = "parse5" id = "parse5">
         <input  type = "button" onclick = "parse6();" value = "Get Analytics" id = "parse6">
         <input  type = "button" onclick = "parse7();" value = "Intent-Vs-Msg" id = "parse7">
+        <input  type = "button" onclick = "parse8();" value = "Join Array" id = "parse8">
+        <input  type = "button" onclick = "parse9();" value = "Max-Len-Str" id = "parse9">
         <script type = "text/javascript">
             var charChecks = [
                 "{['\"[",
@@ -188,6 +198,21 @@ TEST FUNC 7
                     }
                 }
                 document.getElementById("result").value = JSON.stringify(resultObj) + "\n";
+            }
+            function parse8(){
+                const arr = JSON.parse(document.getElementById("text").value);
+                document.getElementById("result").value = arr.join('\n');
+            }
+            function parse9(){
+                const arr = JSON.parse(document.getElementById("text").value);
+                let max = 0, msg = '';
+                for (let k = 0; k < arr.length; k++) {
+                    if (arr[k].length > max) {
+                        max =  arr[k].length;
+                        msg = arr[k];
+                    }
+                }
+                document.getElementById("result").value = msg;
             }
             function replaceAll(str, replace){
                 var newStr = "";
