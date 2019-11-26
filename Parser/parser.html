@@ -43,6 +43,10 @@
         left: 50%;
         top: 630px;
     }
+    #parse7{
+        left: 50%;
+        top: 680px;
+    }
     body{
         overflow-x: hidden;
         overflow-y: scroll;
@@ -58,6 +62,7 @@
         <input  type = "button" onclick = "parse4();" value = "'export' to 'echo'" id = "parse4">
         <input  type = "button" onclick = "parse5();" value = "parse5" id = "parse5">
         <input  type = "button" onclick = "parse6();" value = "Get Analytics" id = "parse6">
+        <input  type = "button" onclick = "parse7();" value = "Intent-Vs-Msg" id = "parse7">
         <script type = "text/javascript">
             var charChecks = [
                 "{['\"[",
@@ -148,6 +153,41 @@
                     }
                 }
                 document.getElementById("result").value = JSON.stringify(analyticsCollection);
+            }
+/*
+TEST FUNC 7
+{
+    "intents": [
+        { "action": "test" },
+        { "action": "test3" }
+    ],
+    "intentsMessage": [
+        { "action": "test" },
+        { "action": "test2" }
+    ]
+}
+*/
+            function parse7(){
+                const json = JSON.parse(document.getElementById("text").value);
+                const intents = [], intentsMessage = [];
+                const resultObj = { sinMensaje: [], sinIntencion: [] };
+                for (let k = 0; k < json.intents.length; k++) {
+                    intents.push(json.intents[k].action);
+                }
+                for (let k = 0; k < json.intentsMessage.length; k++) {
+                    intentsMessage.push(json.intentsMessage[k].action);
+                }
+                for (let k = 0; k < intents.length; k++) {
+                    if (intentsMessage.indexOf(intents[k]) === -1) {
+                        resultObj.sinMensaje.push(intents[k]);
+                    }
+                }
+                for (let k = 0; k < intentsMessage.length; k++) {
+                    if (intents.indexOf(intentsMessage[k]) === -1) {
+                        resultObj.sinIntencion.push(intentsMessage[k]);
+                    }
+                }
+                document.getElementById("result").value = JSON.stringify(resultObj) + "\n";
             }
             function replaceAll(str, replace){
                 var newStr = "";
