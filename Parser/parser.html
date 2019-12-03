@@ -55,6 +55,14 @@
         left: 50%;
         top: 730px;
     }
+    #parse10{
+        left: 50%;
+        top: 780px;
+    }
+    #parse11{
+        left: 50%;
+        top: 830px;
+    }
     body{
         overflow-x: hidden;
         overflow-y: scroll;
@@ -73,6 +81,8 @@
         <input  type = "button" onclick = "parse7();" value = "Intent-Vs-Msg" id = "parse7">
         <input  type = "button" onclick = "parse8();" value = "Join Array" id = "parse8">
         <input  type = "button" onclick = "parse9();" value = "Max-Len-Str" id = "parse9">
+        <input  type = "button" onclick = "parse10();" value = "Mongo-To-Arr" id = "parse10">
+        <input  type = "button" onclick = "parse11();" value = "Obj-Arr_To-Values" id = "parse11">
         <script type = "text/javascript">
             var charChecks = [
                 "{['\"[",
@@ -213,6 +223,16 @@ TEST FUNC 7
                     }
                 }
                 document.getElementById("result").value = msg;
+            }
+            function parse10(){
+                document.getElementById("result").value = `[${document.getElementById("text").value.replace(/\}\n\n\/\* [0-9]+ \*\/\n\{/g, '},{').replace(/^\/\* [0-9]+ \*\/\n/g, '')}]`;
+            }
+            function parse11() {
+                const key = prompt('Wich key?');
+                if (!key) {
+                    return;
+                }
+                document.getElementById("result").value = JSON.stringify(JSON.parse(document.getElementById("text").value).map(obj => obj[key]));
             }
             function replaceAll(str, replace){
                 var newStr = "";
