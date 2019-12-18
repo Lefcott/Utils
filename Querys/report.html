@@ -16,10 +16,14 @@
         text-align: left;
         font-size: 11px;
       }
+      .selector {
+        border-width: 2px;
+        border-radius: 6px;
+      }
     </style>
   </head>
   <body>
-  <table id = 'table'>
+  <table id = 'reportTable'>
     <tr>
       <th>Intención</th>
       <th>Consultas</th>
@@ -38,31 +42,83 @@
     </tr>
   </table>
   <script>
-    const maxRows = 25;
+    (function () {
+      const maxRows = 25, selectorQuant = 5, table = document.getElementById('reportTable');
+      const info = {"negocio.usuario.reclamo_tecnico":{"count":123.0,"averageFreqSeconds":12099.571203252},"negocio.usuario.registro_oficina_virtual":{"count":109.0,"averageFreqSeconds":13324.0834587156},"negocio.usuario.ver_factura_online":{"count":73.0,"averageFreqSeconds":19738.6430273973},"negocio.usuario.numero_cliente":{"count":70.0,"averageFreqSeconds":19721.7677},"negocio.usuario.reclamo_tecnico_falla_externa":{"count":68.0,"averageFreqSeconds":21858.3709852941},"institucional.saludos.hola":{"count":56.0,"averageFreqSeconds":24153.2643392857},"negocio.usuario.cortes_programados":{"count":52.0,"averageFreqSeconds":28144.1668846154},"negocio.usuario.saldo_cuenta":{"count":50.0,"averageFreqSeconds":27715.67178},"negocio.usuario.nuevo_suministro":{"count":50.0,"averageFreqSeconds":26825.87648},"negocio.usuario.informar_pago":{"count":48.0,"averageFreqSeconds":27692.2372083333},"negocio.usuario.conocer_vencimiento_factura":{"count":45.0,"averageFreqSeconds":33258.2355333333},"negocio.usuario.medios_pago":{"count":43.0,"averageFreqSeconds":33778.9790232558},"negocio.usuario.conocer_estado_tramite":{"count":39.0,"averageFreqSeconds":35487.1395384615},"negocio.usuario.contactar_persona":{"count":39.0,"averageFreqSeconds":37551.5544871795},"negocio.usuario.reclamo_falta_factura_fisica":{"count":27.0,"averageFreqSeconds":49638.5201481481},"institucional.saludos.buenos_dias":{"count":27.0,"averageFreqSeconds":51847.024},"negocio.usuario.atencion_clientes":{"count":24.0,"averageFreqSeconds":59845.9599166667},"negocio.usuario.denuncia_robo":{"count":23.0,"averageFreqSeconds":55625.6543043478},"institucional.saludos.buenas_tardes":{"count":23.0,"averageFreqSeconds":53233.0937391304},"institucional.saludos.gracias":{"count":23.0,"averageFreqSeconds":60442.3144782609},"negocio.usuario.cambio_titularidad":{"count":22.0,"averageFreqSeconds":63933.5076818182},"negocio.usuario.pago_tarjeta":{"count":21.0,"averageFreqSeconds":62507.1609047619},"negocio.usuario.plazo_rehabilitar_servicio":{"count":20.0,"averageFreqSeconds":65880.42135},"negocio.usuario.estado_web":{"count":19.0,"averageFreqSeconds":50351.0804736842},"negocio.usuario.tarifa_social":{"count":17.0,"averageFreqSeconds":81877.4609411765},"input.unknown":{"count":15.0,"averageFreqSeconds":40768.4838666667},"institucional.saludos.adios":{"count":15.0,"averageFreqSeconds":92504.828},"negocio.usuario.baja_oficinavirtual":{"count":14.0,"averageFreqSeconds":98557.9165},"negocio.usuario.pago_fuera_vencimiento":{"count":14.0,"averageFreqSeconds":94630.8178571429},"negocio.usuario.debito_automatico":{"count":13.0,"averageFreqSeconds":86050.6925384615},"negocio.usuario.oficinas_comerciales":{"count":13.0,"averageFreqSeconds":109367.730692308},"negocio.usuario.oficina_virtual":{"count":12.0,"averageFreqSeconds":67285.1314166667},"negocio.usuario.medios_contacto":{"count":12.0,"averageFreqSeconds":108210.415083333},"negocio.usuario.alumbrado_publico_sin_luz":{"count":11.0,"averageFreqSeconds":80980.3315454546},"negocio.usuario.olvido_contrasenia":{"count":11.0,"averageFreqSeconds":116640.935454545},"negocio.usuario.fecha_limite_previa_suspension":{"count":10.0,"averageFreqSeconds":130466.9397},"negocio.usuario.baja_suministro":{"count":10.0,"averageFreqSeconds":137806.9574},"negocio.usuario.localidad_eden":{"count":9.0,"averageFreqSeconds":111542.621333333},"negocio.usuario.costo_conexion":{"count":9.0,"averageFreqSeconds":116863.636777778},"negocio.usuario.cuadro_tarifario_vigente":{"count":8.0,"averageFreqSeconds":150069.451375},"negocio.usuario.modificar_datos_comerciales":{"count":7.0,"averageFreqSeconds":173321.596142857},"negocio.usuario.pilar_nuevo_suministro":{"count":6.0,"averageFreqSeconds":218380.556166667},"negocio.usuario.cambio_mail":{"count":5.0,"averageFreqSeconds":229364.8142},"negocio.usuario.peligro_via_publica":{"count":5.0,"averageFreqSeconds":181356.6886},"negocio.usuario.reclamo_tecnico_baja_tension":{"count":4.0,"averageFreqSeconds":151434.0725},"negocio.usuario.descargo_cupon":{"count":4.0,"averageFreqSeconds":281670.26675},"negocio.usuario.registro_electrodependiente":{"count":4.0,"averageFreqSeconds":297731.68},"negocio.usuario.eden_movil":{"count":4.0,"averageFreqSeconds":316434.97775},"input.ignored.automatic":{"count":3.0,"averageFreqSeconds":204284.238666667},"negocio.usuario.no_recibir_notificaciones":{"count":3.0,"averageFreqSeconds":356507.129},"negocio.usuario.cuadro_tarifario":{"count":3.0,"averageFreqSeconds":190364.391},"negocio.usuario.enviar_cv":{"count":3.0,"averageFreqSeconds":225997.624666667},"negocio.usuario.historico_consumos":{"count":3.0,"averageFreqSeconds":384663.861666667},"negocio.usuario.reclamo_daño_equipos":{"count":3.0,"averageFreqSeconds":369520.360333333},"negocio.usuario.censo_de_carga":{"count":2.0,"averageFreqSeconds":27251.605},"negocio.usuario.finalizar_registracion":{"count":2.0,"averageFreqSeconds":7416.2845},"negocio.usuario.simulador_consumo":{"count":2.0,"averageFreqSeconds":446090.3805},"negocio.usuario.acerca_eden":{"count":2.0,"averageFreqSeconds":260500.044},"negocio.usuario.reclamo_comercial":{"count":2.0,"averageFreqSeconds":117569.3905},"negocio.usuario.pago_no_acreditado":{"count":2.0,"averageFreqSeconds":427129.526},"negocio.usuario.asociar_cuenta_oficinavirtual":{"count":2.0,"averageFreqSeconds":478869.147},"negocio.usuario.programa_oficios":{"count":2.0,"averageFreqSeconds":272290.069},"institucional.agente.puedes_ayudar":{"count":1.0,"averageFreqSeconds":85333.735},"negocio.usuario.factura_sin_codigo_barras":{"count":1.0,"averageFreqSeconds":676975.277},"negocio.usuario.que_es_oficinavirtual":{"count":1.0,"averageFreqSeconds":511773.945},"negocio.usuario.cambio_domicilio_postal":{"count":0.0,"averageFreqSeconds":0.0},"negocio.usuario.estado_cuenta":{"count":0.0,"averageFreqSeconds":0.0},"negocio.usuario.electrodomesticos_mayor_consumo":{"count":0.0,"averageFreqSeconds":0.0},"negocio.usuario.aviso_interrupcion_servicio":{"count":0.0,"averageFreqSeconds":0.0},"negocio.usuario.obras":{"count":0.0,"averageFreqSeconds":0.0},"negocio.usuario.redes_sociales_eden":{"count":0.0,"averageFreqSeconds":0.0},"negocio.usuario.notificaciones_oficinavirtual":{"count":0.0,"averageFreqSeconds":0.0}};
+      function getHMS(seconds) {
+        const hoursR = Math.floor(seconds / 3600);
+        const minutesR = Math.floor((seconds - hoursR * 3600) / 60);
+        const secondsR = Math.floor(seconds - hoursR * 3600 - minutesR * 60);
+        return `${hoursR < 10 ? `0${hoursR}` : hoursR}:${minutesR < 10 ? `0${minutesR}` : minutesR}:${secondsR < 10 ? `0${secondsR}` : secondsR}`;
+      }
+      function updateTable(page) {
+        const keys = Object.keys(info);
+        table.innerHTML = '<tr><th>Intención</th><th>Consultas</th><th>Frecuancia promedio</th></tr>';
+        const firstRow = (page - 1) * maxRows, lastRow = page * maxRows - 1;
+        for (let k = firstRow; k <= lastRow; k += 1) {
+          table.innerHTML += `
+            <tr>
+              <td>${keys[k]}</td>
+              <td>${info[keys[k]].count}</td>
+              <td>${getHMS(info[keys[k]].averageFreqSeconds)}</td>
+            </tr>
+          `;
+        }
+      }
+      updateTable(1);
+    })();
     /*
-      // Get month intent info
+      // PASTE THIS QUERY IN MONGO DB SHELL
 
       var year = 2019, month = 12;
       var nextYear = month === 12 ? (year + 1) : year;
       var nextMonth = month === 12 ? 01 : (month + 1)
       month = month < 10 ? ('0' + month) : month;
       nextMonth = nextMonth < 10 ? ('0' + nextMonth) : nextMonth;
+      var lastDates = {};
       var arr = db.getCollection('apiais').find(
       {
           chatbotName: 'Eden-Institucional-Web',
+          action: {$nin: ['test.disponibilidad', 'input.ignored']},
           lastUpdate: {
               $lt: ISODate(nextYear + '-' + nextMonth + '-01T00:00:00.000Z'),
               $gte: ISODate(year + '-' + month + '-01T00:00:00.000Z')
           }
-      }, {webMessageInput: 1, action: 1}).toArray()
+      },
+      { webMessageInput: 1, action: 1, lastUpdate: 1 },
+      { $sort: {lastUpdate: 1} }).toArray()
       var intentObj = {};
       for (var k = 0; k < arr.length; k += 1) {
-          intentObj[arr[k].action] = intentObj[arr[k].action] === undefined ? 0 : intentObj[arr[k].action] + 1;
+          if (!intentObj[arr[k].action]) {
+              intentObj[arr[k].action] = { dateDiffs: [], lastDate: null };
+          } else {
+              intentObj[arr[k].action].dateDiffs.push(arr[k].lastUpdate - intentObj[arr[k].action].lastDate);
+          }
+          intentObj[arr[k].action].lastDate = arr[k].lastUpdate;
+          intentObj[arr[k].action].count = intentObj[arr[k].action].count === undefined ? 0 : intentObj[arr[k].action].count + 1;
       }
-      intentObj;
+      var SORTED_RESULT = {};
+      var keys = Object.keys(intentObj).sort(function (a, b) { return intentObj[a].count > intentObj[b].count ? -1 : 1 })
+
+      keys;
+      keys.map(function (action) {
+          SORTED_RESULT[action] = intentObj[action];
+      });
+      for (var k = 0; k < keys.length; k += 1) {
+          if (SORTED_RESULT[keys[k]].dateDiffs.length === 0) {
+              SORTED_RESULT[keys[k]].dateDiffs = [0];
+          }
+          SORTED_RESULT[keys[k]].averageFreqSeconds = SORTED_RESULT[keys[k]].dateDiffs.reduce(function(a, b) {
+              return a + b
+          }) / SORTED_RESULT[keys[k]].dateDiffs.length / 1000;
+          delete SORTED_RESULT[keys[k]].dateDiffs;
+          delete SORTED_RESULT[keys[k]].lastDate;
+      }
+      SORTED_RESULT;
+
       var info = { year, month, nextYear, nextMonth }
       info
-*/
+    */
   </script>
   </body>
 </html>
