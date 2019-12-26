@@ -2,11 +2,68 @@
 
 <head>
   <title>Compare objects</title>
+  <style>
+    textarea{
+        position: absolute;
+        width: 50%;
+        height: 370px;
+        top: 0;
+    }
+    #text{
+        left: 0;
+    }
+    #result{
+        left: 50%;
+    }
+    input[type=button]{
+        width: 200px;
+        height: 40px;
+        font-size: 25px;
+        position: absolute;
+        transform: translate(-50%);
+    }
+    #parse{
+        left: 50%;
+        top: 380px;
+    }
+  </style>
 </head>
 
 <body>
+  <textarea id = "text">
+[
+      [
+        {
+          "chatbotName": "Camuzzi-Institucional-Web",
+          "action": "negocio.usuario.cambio_servicio_a_trifasico",
+          "other": 1
+        },
+        {
+          "chatbotName": "Camuzzi-Institucional-Web",
+          "action": "institucional.agente.mi_amigo",
+          "other": 12
+        }
+      ],
+      [
+        {
+          "chatbotName": "Camuzzi-Institucional-Web",
+          "action": "negocio.usuario.cambio_servicio_a_trifasico",
+          "other": 12
+        },
+        {
+          "chatbotName": "Camuzzi-Institucional-Web",
+          "action": "institucional.agente.mi_amigo",
+          "other": 12
+        }
+      ]
+    ]
+  </textarea>
+  <textarea id = "result"></textarea>
+  <input  type = "button" onclick = "parse();" value = "Parse" id = "parse">
   <script type='text/javascript'>
-    async function compareObjects(obj1, obj2, excludeFields) {
+    const text = document.getElementById('text');
+    const result = document.getElementById('result');
+    function compareObjects(obj1, obj2, excludeFields) {
       excludeFields = excludeFields || [];
       if (obj1 instanceof Object && obj2 instanceof Object) {
 
@@ -28,7 +85,7 @@
             continue;
           }
           if (obj1[keys1[k]] instanceof Object) {
-            if (!await compareObjects(obj1[keys1[k]], obj2[keys1[k]], [])) {
+            if (!compareObjects(obj1[keys1[k]], obj2[keys1[k]], [])) {
               return false;
             }
           } else {
@@ -45,14 +102,30 @@
 
     // Example: ([{k: 1}, {k: 1}, {k: 1}])
     //   -----> true
-    async function compareNObjects(objects, excludeFields) {
+    function compareNObjects(objects, excludeFields) {
       for (let k = 0; k < objects.length - 1; k++) {
-        if (!await compareObjects(objects[k], objects[k + 1], excludeFields)) {
+        if (!compareObjects(objects[k], objects[k + 1], excludeFields)) {
           return false;
         }
       }
       return true;
     };
+
+    function parse() {
+      text.value = text.value.replace(/ undefined/g, '"undefined"');
+      const json = JSON.parse(text.value);
+      const arr1 = json[0], arr2 = json[1];
+      const notEqual = [];
+      for (let k = 0; k < arr1.length; k += 1) {
+        const json1 = arr1[k];
+        const json2 = arr2.find(json => json.chatbotName === json1.chatbotName && json.action === json1.action && json.sequence === json1.sequence);
+        if (!compareObjects(json1, json2, [])) {
+          notEqual.push(`${json1.chatbotName.substring(0, json1.chatbotName.indexOf('-'))} ${json1.action}`);
+        }
+      }
+      result.innerHTML = JSON.stringify(notEqual);
+    }
+
   </script>
 </body>
 
