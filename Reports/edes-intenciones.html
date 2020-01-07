@@ -81,9 +81,21 @@
           left: 0;
           top: 100px;
         }
+        .arrow {
+          position: absolute;
+          transform: translate(-100%, -50%);
+          width: 50px;
+          height: 50px;
+          border-style: 1.5px;
+          transition: 0.2s;
+        }
+        .arrow:hover {
+          width: 55px;
+          height: 55px;
+        }
       </style>
     </head>
-    <body onselectstart = 'return false;' oncontextmenu = 'return false;'>
+    <body onselectstart = 'return false;' oncontextmenu = 'return false;' onresize = 'resize();'>
       <h1 align = 'center'>Reporte de uso de WhatsApp - Edes</h1>
       <div class = 'msg' id = 'msg'>
         <div class = 'close' onclick = 'closeMsg();'>&times;</div>
@@ -91,11 +103,15 @@
         <div class = 'subtitle' id = 'subtitle'>Subt&iacute;tulo</div>
         <table class = 'list' id = 'list'></table>
       </div>
+      <div class = 'arrow' id = 'arrowRight'>&rarr;</div>
+      <div class = 'arrow' id = 'arrowLeft'>&larr;</div>
       <script>
         const msg = document.getElementById('msg');
         const title = document.getElementById('title');
         const subtitle = document.getElementById('subtitle');
         const list = document.getElementById('list');
+        const arrowRight = document.getElementById('arrowRight');
+        const arrowLeft = document.getElementById('arrowLeft');
         const info = {
           'negocio.usuario.saludos.hola': {
             '01/01/2020': ['hola', 'HOLA!', 'hola que tal', 'HOLA!', 'Hola, como estas?'],
@@ -104,16 +120,19 @@
           'negocio.usuario.saludos.adios': {
             '03/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima'],
             '04/01/2020': ['bye', 'bye bye', 'Goodbye', 'BYE!!'],
+            '05/01/2020': ['bye', 'bye bye', 'Goodbye', 'BYE!!'],
+            '06/01/2020': ['bye', 'bye bye', 'Goodbye', 'BYE!!'],
+            '06/01/2020': ['bye', 'bye bye', 'Goodbye', 'BYE!!']
           }
         };
         let cols = [], rows = Object.keys(info);
         const iniTop = 50;
-        const firstColWidth = 200, width = 85, firstRowHeight = 45, height = 50;
+        const maxCols = 6, maxRows = 10;
+        const firstColWidth = 200, firstRowHeight = 45;
+        let width = 85, height = 50;
         let currRow = null, currCol = null;
         setCols();
-        setFirstCol();
-        setFirstRow();
-        setTable();
+        resize();
         function setCols() {
           cols = {};
           const infoKeys = Object.keys(info);
@@ -188,7 +207,7 @@
           const insertedPhrases = [];
           for (let k = 0; k < phrases.length; k += 1) {
             if (!insertedPhrases.includes(phrases[k])) {
-              list.innerHTML += `<tr><td>${phrases[k]}</td><td>${occInArr(phrases, phrases[k])}</td></tr>`;
+              list.innerHTML += `<tr><td>${phrases[k]}</td><td align = 'center'>${occInArr(phrases, phrases[k])}</td></tr>`;
               insertedPhrases.push(phrases[k]);
             }
           }
@@ -201,6 +220,13 @@
             }
           }
           return count;
+        }
+        function resize() {
+          width = (innerWidth - firstColWidth) / Math.min(maxCols, cols.length);
+          height = (innerHeight - firstRowHeight) / maxRows;
+          setFirstCol();
+          setFirstRow();
+          setTable();
         }
       </script>
     </body>
