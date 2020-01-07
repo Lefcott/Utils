@@ -1,0 +1,147 @@
+<html>
+  <head>
+    <style>
+      table{
+        max-width: 850px;
+        font-family: 'Roboto', sans-serif;
+        background-color: #BBB;
+        border-bottom-left-radius: 7px;
+        border-bottom-right-radius: 7px;
+        border-bottom-style: solid;
+        border-bottom-width: 2px;
+        box-shadow: 5px 5px 20px #AAA;
+        margin-bottom: 10px;
+      }
+      table th{
+        background-color: #3D83C4;
+        color: white;
+        text-align: left;
+        font-size: 14px;
+      }
+      table td{
+        color: #525353;
+        text-align: left;
+        font-size: 11px;
+      }
+      .selector {
+        position: absolute;
+        text-align: center;
+        cursor: pointer;
+        border-width: 2px;
+        border-style: solid;
+        border-radius: 6px;
+      }
+      #selectors {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%);
+      }
+      body {
+        background-color: #DDD;
+        overflow: hidden;
+      }
+      .segment {
+        background-color: #000;
+        position: absolute;
+        border-style: solid;
+        border-width: 1px;
+      }
+      #leftSegment {
+        box-shadow: 5px 0px 10px;
+        left: -3px;
+        top: 0;
+        width: 1px;
+        height: 100%;
+      }
+      #rightSegment {
+        box-shadow: -5px 0px 10px;
+        left: 100%;
+        top: 0;
+        width: 1px;
+        height: 100%;
+      }
+      #topSegment {
+        box-shadow: 0px 5px 10px;
+        left: 0;
+        top: -3px;
+        width: 100%;
+        height: 1px;
+      }
+      #bottomSegment {
+        box-shadow: 0px -5px 10px;
+        left: 0;
+        top: 100%;
+        width: 100%;
+        height: 1px;
+      }
+    </style>
+  </head>
+  <body>
+  <div id = 'leftSegment' class = 'segment'></div>
+  <div id = 'rightSegment' class = 'segment'></div>
+  <div id = 'topSegment' class = 'segment'></div>
+  <div id = 'bottomSegment' class = 'segment'></div>
+  <h1 align = 'center'>Chatbot Eden: diciembre 2019</h1>
+  <table id = 'reportTable' align = 'center'>
+    <tr>
+      <th>Intención</th>
+      <th>Consultas</th>
+    </tr>
+    <tr>
+      <td>prueba</td>
+      <td>prueba</td>
+    </tr>
+    <tr>
+      <td>prueba</td>
+      <td>prueba</td>
+    </tr>
+    <tr>
+      <td>prueba</td>
+      <td>prueba</td>
+    </tr>
+  </table>
+  <div id = 'selectors'></div>
+  <script>
+    const maxRows = 25, table = document.getElementById('reportTable');
+    const buttonWidth = 45, buttonHeight = 20, selectors = document.getElementById('selectors');
+    const unselectedColor = '#888', selectedColor = '#8F8';
+    selectors.style.height = `${buttonHeight}px`;
+    const info = {"negocio.usuario.reclamo_tecnico":{"count":301.0,"averageFreqSeconds":8824.53097666667},"negocio.usuario.reclamo_tecnico_falla_externa":{"count":187.0,"averageFreqSeconds":14233.2720215054},"negocio.usuario.registro_oficina_virtual":{"count":145.0,"averageFreqSeconds":17203.358375},"negocio.usuario.ver_factura_online":{"count":115.0,"averageFreqSeconds":21722.6253859649},"negocio.usuario.numero_cliente":{"count":109.0,"averageFreqSeconds":23468.0080833333},"institucional.saludos.hola":{"count":97.0,"averageFreqSeconds":27019.4487708333},"negocio.usuario.informar_pago":{"count":83.0,"averageFreqSeconds":30242.6187073171},"negocio.usuario.contactar_persona":{"count":75.0,"averageFreqSeconds":34720.4748243243},"negocio.usuario.conocer_estado_tramite":{"count":74.0,"averageFreqSeconds":34320.1945616438},"negocio.usuario.nuevo_suministro":{"count":74.0,"averageFreqSeconds":34810.0534109589},"negocio.usuario.saldo_cuenta":{"count":70.0,"averageFreqSeconds":35312.2916956522},"negocio.usuario.medios_pago":{"count":65.0,"averageFreqSeconds":37379.649640625},"negocio.usuario.conocer_vencimiento_factura":{"count":64.0,"averageFreqSeconds":40277.6022222222},"negocio.usuario.cortes_programados":{"count":58.0,"averageFreqSeconds":39733.7156315789},"negocio.usuario.denuncia_robo":{"count":41.0,"averageFreqSeconds":59072.099875},"negocio.usuario.atencion_clientes":{"count":41.0,"averageFreqSeconds":61929.742025},"institucional.saludos.buenos_dias":{"count":38.0,"averageFreqSeconds":68138.7544054054},"negocio.usuario.reclamo_falta_factura_fisica":{"count":37.0,"averageFreqSeconds":67554.3130555556},"negocio.usuario.estado_web":{"count":33.0,"averageFreqSeconds":75789.64771875},"negocio.usuario.pago_tarjeta":{"count":33.0,"averageFreqSeconds":79458.0145},"negocio.usuario.plazo_rehabilitar_servicio":{"count":33.0,"averageFreqSeconds":77030.57971875},"institucional.saludos.buenas_tardes":{"count":32.0,"averageFreqSeconds":78297.8898064516},"negocio.usuario.pago_fuera_vencimiento":{"count":32.0,"averageFreqSeconds":81872.7865483871},"institucional.saludos.gracias":{"count":31.0,"averageFreqSeconds":85183.2370333333},"negocio.usuario.oficinas_comerciales":{"count":30.0,"averageFreqSeconds":87496.1424137931},"negocio.usuario.tarifa_social":{"count":29.0,"averageFreqSeconds":87733.3977142857},"negocio.usuario.cambio_titularidad":{"count":26.0,"averageFreqSeconds":86808.0096},"negocio.usuario.alumbrado_publico_sin_luz":{"count":24.0,"averageFreqSeconds":89757.9330434783},"negocio.usuario.baja_oficinavirtual":{"count":23.0,"averageFreqSeconds":105895.456318182},"negocio.usuario.debito_automatico":{"count":22.0,"averageFreqSeconds":107405.34447619},"negocio.usuario.medios_contacto":{"count":20.0,"averageFreqSeconds":123811.766},"institucional.saludos.adios":{"count":19.0,"averageFreqSeconds":138560.908277778},"negocio.usuario.olvido_contrasenia":{"count":18.0,"averageFreqSeconds":140322.064},"negocio.usuario.oficina_virtual":{"count":17.0,"averageFreqSeconds":101330.10825},"negocio.usuario.peligro_via_publica":{"count":17.0,"averageFreqSeconds":159427.6688125},"negocio.usuario.reclamo_tecnico_baja_tension":{"count":16.0,"averageFreqSeconds":148795.728333333},"negocio.usuario.baja_suministro":{"count":16.0,"averageFreqSeconds":146020.105933333},"negocio.usuario.localidad_eden":{"count":14.0,"averageFreqSeconds":165179.426230769},"negocio.usuario.reclamo_daño_equipos":{"count":14.0,"averageFreqSeconds":193074.583923077},"negocio.usuario.cuadro_tarifario_vigente":{"count":13.0,"averageFreqSeconds":183365.728083333},"negocio.usuario.fecha_limite_previa_suspension":{"count":13.0,"averageFreqSeconds":195126.71175},"negocio.usuario.pilar_nuevo_suministro":{"count":13.0,"averageFreqSeconds":180635.794166667},"negocio.usuario.costo_conexion":{"count":11.0,"averageFreqSeconds":204973.2641},"negocio.usuario.modificar_datos_comerciales":{"count":9.0,"averageFreqSeconds":227176.08325},"negocio.usuario.cambio_mail":{"count":7.0,"averageFreqSeconds":330470.832},"negocio.usuario.eden_movil":{"count":7.0,"averageFreqSeconds":358407.22},"negocio.usuario.descargo_cupon":{"count":6.0,"averageFreqSeconds":349514.6764},"negocio.usuario.historico_consumos":{"count":6.0,"averageFreqSeconds":403074.605},"negocio.usuario.registro_electrodependiente":{"count":6.0,"averageFreqSeconds":242358.7214},"negocio.usuario.programa_oficios":{"count":6.0,"averageFreqSeconds":497247.2956},"institucional.agente.puedes_ayudar":{"count":5.0,"averageFreqSeconds":406134.367},"negocio.usuario.enviar_cv":{"count":5.0,"averageFreqSeconds":366526.99575},"negocio.usuario.acerca_eden":{"count":5.0,"averageFreqSeconds":546080.18925},"negocio.usuario.reclamo_comercial":{"count":5.0,"averageFreqSeconds":604764.7085},"negocio.usuario.pago_no_acreditado":{"count":5.0,"averageFreqSeconds":415757.2525},"negocio.usuario.asociar_cuenta_oficinavirtual":{"count":5.0,"averageFreqSeconds":549873.735},"input.unknown":{"count":4.0,"averageFreqSeconds":158521.992333333},"negocio.usuario.censo_de_carga":{"count":4.0,"averageFreqSeconds":375678.921333333},"negocio.usuario.obras":{"count":4.0,"averageFreqSeconds":497749.553333333},"negocio.usuario.factura_sin_codigo_barras":{"count":4.0,"averageFreqSeconds":597652.901333333},"negocio.usuario.simulador_consumo":{"count":4.0,"averageFreqSeconds":503059.646},"negocio.usuario.no_recibir_notificaciones":{"count":4.0,"averageFreqSeconds":356507.129},"negocio.usuario.cuadro_tarifario":{"count":4.0,"averageFreqSeconds":190364.391},"negocio.usuario.estado_cuenta":{"count":3.0,"averageFreqSeconds":573477.7725},"negocio.usuario.finalizar_registracion":{"count":3.0,"averageFreqSeconds":7416.2845},"institucional.agente.chatbot":{"count":2.0,"averageFreqSeconds":734936.967},"negocio.usuario.cambio_domicilio_postal":{"count":2.0,"averageFreqSeconds":527933.078},"negocio.usuario.que_es_oficinavirtual":{"count":2.0,"averageFreqSeconds":511773.945},"institucional.saludos.buenas_noches":{"count":1.0,"averageFreqSeconds":0.0},"negocio.usuario.reclamo_tecnico_falla_externa_transaccion":{"count":1.0,"averageFreqSeconds":0.0},"negocio.usuario.electrodomesticos_mayor_consumo":{"count":1.0,"averageFreqSeconds":0.0},"negocio.usuario.aviso_interrupcion_servicio":{"count":1.0,"averageFreqSeconds":0.0},"negocio.usuario.redes_sociales_eden":{"count":1.0,"averageFreqSeconds":0.0},"negocio.usuario.notificaciones_oficinavirtual":{"count":1.0,"averageFreqSeconds":0.0},"negocio.usuario.reclamo_tecnico_sin_luz_p1":{"count":0.0,"averageFreqSeconds":0.0},"negocio.usuario.consejos_uso_eficiente":{"count":0.0,"averageFreqSeconds":0.0},"negocio.usuario.recibir_notificaciones":{"count":0.0,"averageFreqSeconds":0.0},"negocio.usuario.prensa":{"count":0.0,"averageFreqSeconds":0.0},"negocio.usuario.bonificacion_ahorro":{"count":0.0,"averageFreqSeconds":0.0},"institucional.agente.alli":{"count":0.0,"averageFreqSeconds":0.0},"institucional.agente.correcto":{"count":0.0,"averageFreqSeconds":0.0},"institucional.agente.hablame":{"count":0.0,"averageFreqSeconds":0.0},"institucional.agente.insulto":{"count":0.0,"averageFreqSeconds":0.0},"institucional.agente.locura":{"count":0.0,"averageFreqSeconds":0.0},"institucional.agente.malo":{"count":0.0,"averageFreqSeconds":0.0},"institucional.agente.molesto":{"count":0.0,"averageFreqSeconds":0.0},"institucional.emociones.ja_ja":{"count":0.0,"averageFreqSeconds":0.0},"institucional.emociones.wow":{"count":0.0,"averageFreqSeconds":0.0},"institucional.saludos.bienvenido":{"count":0.0,"averageFreqSeconds":0.0},"institucional.saludos.bueno":{"count":0.0,"averageFreqSeconds":0.0},"institucional.saludos.como_estas":{"count":0.0,"averageFreqSeconds":0.0},"institucional.saludos.malo":{"count":0.0,"averageFreqSeconds":0.0},"institucional.saludos.que_tal":{"count":0.0,"averageFreqSeconds":0.0},"institucional.usuario.amo_este_agente":{"count":0.0,"averageFreqSeconds":0.0},"institucional.usuario.broma":{"count":0.0,"averageFreqSeconds":0.0},"institucional.usuario.volvere":{"count":0.0,"averageFreqSeconds":0.0},"negocio.usuario.solicitar_corte_por_arreglo":{"count":0.0,"averageFreqSeconds":0.0},"negocio.usuario.faturacion_inmueble_vacio":{"count":0.0,"averageFreqSeconds":0.0},"institucional.agente.concerte":{"count":0.0,"averageFreqSeconds":0.0},"institucional.agente.listo":{"count":0.0,"averageFreqSeconds":0.0},"institucional.agente.responde_mi_pregunta":{"count":0.0,"averageFreqSeconds":0.0},"institucional.agente.belleza":{"count":0.0,"averageFreqSeconds":0.0},"institucional.agente.bueno":{"count":0.0,"averageFreqSeconds":0.0},"institucional.agente.casate_conmigo":{"count":0.0,"averageFreqSeconds":0.0},"institucional.agente.cumpleanos":{"count":0.0,"averageFreqSeconds":0.0},"institucional.agente.edad":{"count":0.0,"averageFreqSeconds":0.0},"institucional.agente.estas_listo":{"count":0.0,"averageFreqSeconds":0.0},"institucional.agente.feliz":{"count":0.0,"averageFreqSeconds":0.0},"institucional.agente.hambre":{"count":0.0,"averageFreqSeconds":0.0},"institucional.agente.hobby":{"count":0.0,"averageFreqSeconds":0.0},"institucional.agente.jefe":{"count":0.0,"averageFreqSeconds":0.0},"institucional.agente.mi_amigo":{"count":0.0,"averageFreqSeconds":0.0},"institucional.agente.ocupacion":{"count":0.0,"averageFreqSeconds":0.0},"institucional.agente.ocupado":{"count":0.0,"averageFreqSeconds":0.0},"institucional.agente.origen":{"count":0.0,"averageFreqSeconds":0.0},"institucional.agente.real":{"count":0.0,"averageFreqSeconds":0.0},"institucional.agente.residencia":{"count":0.0,"averageFreqSeconds":0.0},"institucional.agente.seguro":{"count":0.0,"averageFreqSeconds":0.0},"institucional.dialogo.abrazame":{"count":0.0,"averageFreqSeconds":0.0},"institucional.dialogo.lo_siento":{"count":0.0,"averageFreqSeconds":0.0},"institucional.saludos.bien_echo":{"count":0.0,"averageFreqSeconds":0.0},"institucional.saludos.sin_problema":{"count":0.0,"averageFreqSeconds":0.0},"institucional.usuario.aburrido":{"count":0.0,"averageFreqSeconds":0.0},"institucional.usuario.aqui":{"count":0.0,"averageFreqSeconds":0.0},"institucional.usuario.bueno":{"count":0.0,"averageFreqSeconds":0.0},"institucional.usuario.cansado":{"count":0.0,"averageFreqSeconds":0.0},"institucional.usuario.como_estoy":{"count":0.0,"averageFreqSeconds":0.0},"institucional.usuario.en_espera":{"count":0.0,"averageFreqSeconds":0.0},"institucional.usuario.enojado":{"count":0.0,"averageFreqSeconds":0.0},"institucional.usuario.otros_bots":{"count":0.0,"averageFreqSeconds":0.0},"institucional.usuario.sueño":{"count":0.0,"averageFreqSeconds":0.0},"institucional.usuario.triste":{"count":0.0,"averageFreqSeconds":0.0},"institucional.usuario.volver":{"count":0.0,"averageFreqSeconds":0.0},"negocio.usuario.contacto_enre":{"count":0.0,"averageFreqSeconds":0.0},"negocio.usuario.beneficio_jubilados":{"count":0.0,"averageFreqSeconds":0.0},"negocio.usuario.seguridad":{"count":0.0,"averageFreqSeconds":0.0},"negocio.usuario.eficiencia_energetica":{"count":0.0,"averageFreqSeconds":0.0},"institucional.usuario.es_mi_cumpleaños":{"count":0.0,"averageFreqSeconds":0.0},"institucional.usuario.feliz":{"count":0.0,"averageFreqSeconds":0.0},"negocio.usuario.rse":{"count":0.0,"averageFreqSeconds":0.0},"negocio.usuario.desa":{"count":0.0,"averageFreqSeconds":0.0},"negocio.usuario.otras_utilities":{"count":0.0,"averageFreqSeconds":0.0},"institucional.dialogo.que_es_lo_que_significa":{"count":0.0,"averageFreqSeconds":0.0},"institucional.saludos.es_bueno_hablar_con_vos":{"count":0.0,"averageFreqSeconds":0.0},"institucional.saludos.mucho_gusto_de_conocerte":{"count":0.0,"averageFreqSeconds":0.0},"institucional.saludos.que_bueno_verte":{"count":0.0,"averageFreqSeconds":0.0},"institucional.usuario.ganas_de_verte_otra_vez":{"count":0.0,"averageFreqSeconds":0.0},"institucional.usuario.me_gusta_este_agente":{"count":0.0,"averageFreqSeconds":0.0},"institucional.usuario.necesito_consejo":{"count":0.0,"averageFreqSeconds":0.0},"institucional.usuario.no_quiero_hablar":{"count":0.0,"averageFreqSeconds":0.0},"institucional.usuario.servicio_meteorologico":{"count":0.0,"averageFreqSeconds":0.0},"institucional.usuario.respuesta_incorrecta":{"count":0.0,"averageFreqSeconds":0.0},"institucional.agente.despedido":{"count":0.0,"averageFreqSeconds":0.0},"institucional.agente.divertido":{"count":0.0,"averageFreqSeconds":0.0},"institucional.agente.se_mas_inteligente":{"count":0.0,"averageFreqSeconds":0.0},"institucional.dialogo.espera_en_linea":{"count":0.0,"averageFreqSeconds":0.0},"institucional.dialogo.incorrecto":{"count":0.0,"averageFreqSeconds":0.0},"institucional.dialogo.no_me_importa":{"count":0.0,"averageFreqSeconds":0.0},"institucional.usuario.emocionado":{"count":0.0,"averageFreqSeconds":0.0},"institucional.usuario.me_voy_a_dormir":{"count":0.0,"averageFreqSeconds":0.0},"institucional.usuario.no_puedo_dormir":{"count":0.0,"averageFreqSeconds":0.0},"institucional.usuario.probando_el_agente":{"count":0.0,"averageFreqSeconds":0.0},"institucional.usuario.solitario":{"count":0.0,"averageFreqSeconds":0.0},"institucional.usuario.te_extraño_agente":{"count":0.0,"averageFreqSeconds":0.0}};
+    function getHMS(seconds) {
+      const hoursR = Math.floor(seconds / 3600);
+      const minutesR = Math.floor((seconds - hoursR * 3600) / 60);
+      const secondsR = Math.floor(seconds - hoursR * 3600 - minutesR * 60);
+      return `${hoursR < 10 ? `0${hoursR}` : hoursR}:${minutesR < 10 ? `0${minutesR}` : minutesR}:${secondsR < 10 ? `0${secondsR}` : secondsR}`;
+    }
+    function updateTable(page) {
+      const keys = Object.keys(info);
+      table.innerHTML = '<tr><th>Intención</th><th>Consultas</th><th>Frecuancia promedio</th></tr>';
+      const firstRow = (page - 1) * maxRows, lastRow = page * maxRows - 1;
+      for (let k = firstRow; k <= lastRow && info[keys[k]]; k += 1) {
+        table.innerHTML += `
+          <tr>
+            <td>${keys[k]}</td>
+            <td style = 'text-align: center;'>${info[keys[k]].count}</td>
+            <td style = 'text-align: center;'>${getHMS(info[keys[k]].averageFreqSeconds)}</td>
+          </tr>
+        `;
+      }
+      const buttons = Math.ceil(keys.length / maxRows);
+      selectors.style.width = `${buttonWidth * buttons}px`;
+      for (let k = 0; k < buttons; k += 1) {
+        const button = document.createElement('div');
+        button.setAttribute('class', 'selector');
+        button.setAttribute('onclick', `updateTable(${k + 1})`);
+        button.setAttribute('onselectstart', `return false;`);
+        button.innerHTML = k + 1;
+        button.style.width = `${buttonWidth}px`;
+        button.style.height = `${buttonHeight}px`;
+        button.style.left = `${buttonWidth * k}px`;
+        button.style.backgroundColor = page === k + 1 ? selectedColor : unselectedColor;
+        selectors.appendChild(button);
+      }
+    }
+    updateTable(1);
+  </script>
+  </body>
+</html>

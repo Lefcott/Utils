@@ -1,0 +1,154 @@
+<html>
+    <head>
+      <style>
+        body {
+          background-color: #cbf590;
+          overflow: hidden;
+        }
+        .cell {
+          position: absolute;
+          background-color: #44b81d;
+          border-style: solid;
+          border-width: 0.5px;
+          text-align: center;
+          transition: 0.2s;
+          cursor: pointer;
+        }
+        .cell:hover {
+          background-color: #6d9e28;
+          text-shadow: 0 0 3px;
+        }
+        .cellHead {
+          background-color: #2ca105;
+          border-style: solid;
+          border-width: 1.2px;
+        }
+        .msg {
+          position: absolute;
+          border-bottom-left-radius: 50px;
+          border-top-left-radius: 50px;
+          border-style: solid;
+          border-width: 1px;
+          background-color: #DDD;
+          transition: 0.2s;
+          left: 100%;
+          top: 50%;
+          transform: translate(0, -50%);
+          width: 50%;
+          height: 80%;
+          z-index: 2;
+        }
+        .close {
+          position: absolute;
+          transform: translate(-100%);
+          left: 99%;
+          top: 1%;
+          width: 80px;
+          height: 40px;
+          border-style: solid;
+          border-width: 1.8px;
+          background-color: #F55;
+          text-align: center;
+          font-size: 30px;
+          cursor: pointer;
+          transition: 0.2s;
+        }
+        .close:hover {
+          border-radius: 50%;
+          border-width: 0;
+          background-color: #F77;
+          width: 50px;
+          height: 50px;
+        }
+      </style>
+    </head>
+    <body onselectstart = 'return false;' oncontextmenu = 'return false;'>
+      <h1 align = 'center'>Reporte de intenciones de WhatsApp - Edes</h1>
+      <div class = 'msg' id = 'msg'>
+        <div class = 'close'>&times;</div>
+      </div>
+      <script>
+        const msg = document.getElementById('msg');
+        const info = {
+          'negocio.usuario.saludos.hola': {
+            '01/01/2020': ['hola', 'HOLA!', 'hola que tal', 'Hola, como estas?'],
+            '02/01/2020': ['holp', 'hello', 'hi', 'HELLLO!!'],
+          },
+          'negocio.usuario.saludos.adios': {
+            '03/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima'],
+            '04/01/2020': ['bye', 'bye bye', 'Goodbye', 'BYE!!'],
+          }
+        };
+        let cols = [], rows = Object.keys(info);
+        const iniTop = 50;
+        const firstColWidth = 200, width = 85, firstRowHeight = 45, height = 50;
+        let currRow = null, currCol = null;
+        setCols();
+        setFirstCol();
+        setFirstRow();
+        setTable();
+        function setCols() {
+          cols = {};
+          const infoKeys = Object.keys(info);
+          for (let k = 0; k < infoKeys.length; k += 1) {
+            const dates = Object.keys(info[infoKeys[k]]);
+            for (let m = 0; m < dates.length; m += 1) {
+              cols[dates[m]] = 1;
+            }
+          }
+          cols = Object.keys(cols);
+        }
+        function setFirstCol() {
+          for (let k = 0; k < rows.length; k += 1) {
+            const cell = document.createElement('div');
+            cell.setAttribute('class', 'cell cellHead');
+            cell.style.left = 0;
+            cell.style.top = `${iniTop + firstRowHeight + k * height}px`;
+            cell.style.width = `${firstColWidth}px`;
+            cell.style.height = `${height}px`;
+            cell.innerHTML = rows[k];
+            document.body.appendChild(cell);
+          }
+        }
+        function setFirstRow() {
+          for (let k = 0; k < cols.length; k += 1) {
+            const cell = document.createElement('div');
+            cell.setAttribute('class', 'cell cellHead');
+            cell.style.left = `${firstColWidth + k * width}`;
+            cell.style.top = `${iniTop}px`;
+            cell.style.width = `${width}px`;
+            cell.style.height = `${firstRowHeight}px`;
+            cell.innerHTML = cols[k];
+            document.body.appendChild(cell);
+          }
+        }
+        function setTable() {
+          for (let k = 0; k < rows.length; k += 1) {
+            for (let m = 0; m < cols.length; m += 1) {
+              const cell = document.createElement('div');
+              cell.setAttribute('class', 'cell');
+              cell.setAttribute('onclick', `clickCell(event.target, '${rows[k]}', '${cols[m]}')`);
+              cell.style.left = `${firstColWidth + m * width}`;
+              cell.style.top = `${iniTop + firstRowHeight + k * height}px`;
+              cell.style.width = `${width}px`;
+              cell.style.height = `${height}px`;
+              cell.innerHTML = info[rows[k]][cols[m]] ? info[rows[k]][cols[m]].length : 0;
+              document.body.appendChild(cell);
+            }
+          }
+        }
+        function clickCell(cell, row, col) {
+          
+          if (currRow === row && currCol === col) {
+            msg.style.left = '100%';
+            currRow = null;
+            currCol = null;
+          } else {
+            msg.style.left = `${innerWidth / 2}px`;
+            currRow = row;
+            currCol = col;
+          }
+        }
+      </script>
+    </body>
+</html>
