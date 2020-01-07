@@ -175,7 +175,7 @@
             cell.style.top = `${iniTop}px`;
             cell.style.width = `${width}px`;
             cell.style.height = `${firstRowHeight}px`;
-            cell.innerHTML = cols[k];
+            cell.innerHTML = cols[k - currDiffX];
             document.body.appendChild(cell);
           }
         }
@@ -251,10 +251,6 @@
         function move(diffX, diffY) {
           diffX = diffX || 0;
           diffY = diffY || 0;
-          // TODO remove console
-          console.log(`col: ${actualCols + currDiffX + diffX}`);
-          console.log(`row: ${actualRows + currDiffY + diffY}`);
-          
           if (cols.length - actualCols + currDiffX + diffX < 0 || currDiffX + diffX > 0 ||
               rows.length - actualRows + currDiffY + diffY < 0 || currDiffY + diffY > 0) {
             return;
@@ -270,6 +266,7 @@
               }
             }
           }
+          setFirstRow();
         }
       </script>
     </body>
