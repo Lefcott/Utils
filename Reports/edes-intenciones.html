@@ -82,24 +82,6 @@
           left: 0;
           top: 100px;
         }
-        .arrow {
-          position: absolute;
-          transform: translate(-50%, -50%);
-          width: 30px;
-          height: 30px;
-          border-style: 1.5px;
-          border-radius: 50%;
-          transition: 0.2s;
-          font-size: 30px;
-          background-color: #AAA;
-          z-index: 3;
-          text-align: center;
-          cursor: pointer;
-        }
-        .arrow:hover {
-          width: 38px;
-          height: 38px;
-        }
       </style>
     </head>
     <body onselectstart = 'return false;' oncontextmenu = 'return false;' onresize = 'resize();'>
@@ -136,10 +118,14 @@
         const firstColWidth = 200, firstRowHeight = 45;
         let width = 85, height = 50, maxWidth = 150, maxHeight = 80;
         let currRow = null, currCol = null, currDiffX = 0, currDiffY = 0;
-        const buttonWidth = 25, buttonHeight = 20;
         setCols();
         const actualCols = Math.min(maxCols, cols.length);
         const actualRows = Math.min(maxRows, rows.length);
+        const pagesX = Math.ceil(cols.length / actualCols);
+        const pagesY = Math.ceil(rows.length / actualRows);
+        const buttonWidth = 25, buttonHeight = 20, buttonsBottom = actualCols + 2, buttonsRight = actualRows + 2;
+        const buttonSelected = { borderWidth: '2px', zIndex: 2 };
+        const buttonUnselected = { borderWidth: '0.5px', zIndex: 1 };
         resize();
         function setCols() {
           cols = {};
@@ -248,25 +234,42 @@
           setTable();
           setButtonsBottom();
           setButtonsRight();
+          move(0, 0);
         }
-        function setArrows() {
-          arrowRight.style.left = `${firstColWidth + actualCols * width}`;
-          arrowRight.style.top = `${iniTop + firstRowHeight + actualRows * height / 2}px`;
-          arrowLeft.style.left = `${firstColWidth}px`;
-          arrowLeft.style.top = `${iniTop + firstRowHeight + actualRows * height / 2}px`;
-          // TODO SEGUIR CON ESTO !!!
-          arrowTop.style.left = `${firstColWidth + actualCols * width / 2}px`;
-          arrowTop.style.top = `${firstRowHeight}`;
+        function setStyle(style, target) {
+          const styleKeys = Object.keys(style);
+          if (target) {
+            for (let k = 0; k < styleKeys.length; k += 1) {
+                target.style[styleKeys[k]] = style[styleKeys[k]];
+            }
+          }
+        }
+        function unSelectPage(x, y) {
+          const buttonRight = document.getElementById(`buttonRight_${y}`);
+          const buttonBottom = document.getElementById(`buttonBottom_${x}`);
+          setStyle(buttonUnselected, buttonRight);
+          setStyle(buttonUnselected, buttonBottom);
+        }
+        function selectPage(x, y) {
+          const buttonRight = document.getElementById(`buttonRight_${y}`);
+          const buttonBottom = document.getElementById(`buttonBottom_${x}`);
+          setStyle(buttonSelected, buttonRight);
+          setStyle(buttonSelected, buttonBottom);
         }
         function move(diffX, diffY) {
+          // TODO remove console
+          console.log(`Move ${diffX}, ${diffY}`);
+          
           diffX = diffX || 0;
           diffY = diffY || 0;
           if (cols.length - actualCols + currDiffX + diffX < 0 || currDiffX + diffX > 0 ||
               rows.length - actualRows + currDiffY + diffY < 0 || currDiffY + diffY > 0) {
             return;
           }
+          unSelectPage(-currDiffX + 1, -currDiffY + 1);
           currDiffX += diffX || 0;
           currDiffY += diffY || 0;
+          selectPage(-currDiffX + 1, -currDiffY + 1);
           for (let k = 0; k < rows.length; k += 1) {
             for (let m = 0; m < cols.length; m += 1) {
               const cell = document.getElementById(`${k}_${m}`);
@@ -281,12 +284,57 @@
           }
           setFirstRow();
           setFirstCol();
+          setButtonsBottom();
+          setButtonsRight();
         }
         function setButtonsBottom() {
-
+          const buttonWidthThis = (actualCols * width - buttonWidth) / buttonsBottom;
+          for (let k = 0; k < buttonsBottom; k += 1) {
+            const button = document.getElementById(`buttonBottom_${k}`) || document.createElement('div');
+            button.id = `buttonBottom_${k}`;
+            button.setAttribute('class', 'cell');
+            button.style.width = `${buttonWidthThis}px`;
+            button.style.height = `${buttonHeight}px`;
+            button.style.left = `${firstColWidth + k * buttonWidthThis}px`;
+            button.style.top = `${iniTop + firstRowHeight + actualRows * height - buttonHeight}px`;
+            switch (k) {
+              case 0:
+                button.innerHTML = '&larr;';
+                button.setAttribute('onclick', 'move(1, 0)');
+                break;
+              case k === buttonsBottom - 1:
+                button.innerHTML = '&rarr;';
+                button.setAttribute('onclick', 'move(-1, 0)');
+                break;
+              default:
+                button.setAttribute('onclick', `move(${k - (-currDiffX + 1)}, 0)`);
+                button.innerHTML = k;
+                break;
+            }
+            document.body.appendChild(button);
+          }
         }
         function setButtonsRight() {
-
+          const buttonHeightThis = (actualRows * height - buttonHeight) / buttonsRight;
+          for (let k = 0; k < buttonsRight; k += 1) {
+            const button = document.getElementById(`buttonRight_${k}`) || document.createElement('div');
+            button.id = `buttonRight_${k}`;
+            button.setAttribute('class', 'cell');
+            button.style.width = `${buttonWidth}px`;
+            button.style.height = `${buttonHeightThis}px`;
+            button.style.left = `${firstColWidth + actualCols * width - buttonWidth}px`;
+            button.style.top = `${iniTop + firstRowHeight + k * buttonHeightThis}px`;
+            button.innerHTML = k;
+            if (k === 0) {
+              button.innerHTML = '&uarr;';
+              button.setAttribute('onclick', 'move(0, 1)');
+            }
+            if (k === buttonsRight - 1) {
+              button.innerHTML = '&darr;';
+              button.setAttribute('onclick', 'move(0, -1)');
+            }
+            document.body.appendChild(button);
+          }
         }
       </script>
     </body>
