@@ -11,17 +11,21 @@
           border-style: solid;
           border-width: 0.5px;
           text-align: center;
-          transition: 0.2s;
           cursor: pointer;
         }
         .cell:hover {
           background-color: #6d9e28;
           text-shadow: 0 0 3px;
         }
+        .button {
+          font-size: 18px;
+          background-color: #277807;
+        }
         .cellHead {
           background-color: #2ca105;
           border-style: solid;
           border-width: 1.2px;
+          transition: 0.2s;
           z-index: 2;
         }
         .msg {
@@ -103,27 +107,168 @@
             '02/01/2020': ['holp', 'hello', 'hi', 'HELLLO!!'],
           },
           'negocio.usuario.saludos.adios': {
-            '03/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima'],
-            '04/01/2020': ['bye', 'bye bye', 'Goodbye', 'BYE!!'],
-            '05/01/2020': ['bye', 'bye bye', 'Goodbye', 'BYE!!'],
-            '06/01/2020': ['bye', 'bye bye', 'Goodbye', 'BYE!!'],
-            '06/01/2020': ['bye', 'bye bye', 'Goodbye', 'BYE!!'],
-            '07/01/2020': ['bye', 'bye bye', 'Goodbye', 'BYE!!'],
-            '08/01/2020': ['bye', 'bye bye', 'Goodbye', 'BYE!!']
+            '03/01/2020': ['chau'],
+            '04/01/2020': ['chau', 'Chau!'],
+            '05/01/2020': ['chau', 'Chau!', 'chau nos vemos'],
+            '06/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima'],
+            '07/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5'],
+            '08/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6'],
+            '09/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7'],
+            '10/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8'],
+            '11/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9'],
+            '12/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10'],
+            '13/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10', '11'],
+            '14/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10', '11', '12'],
+            '15/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10', '11', '12', '13']
+          },
+          'negocio.usuario.saludos.adios2': {
+            '03/01/2020': ['chau'],
+            '04/01/2020': ['chau', 'Chau!'],
+            '05/01/2020': ['chau', 'Chau!', 'chau nos vemos'],
+            '06/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima'],
+            '07/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5'],
+            '08/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6'],
+            '09/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7'],
+            '10/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8'],
+            '11/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9'],
+            '12/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10'],
+            '13/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10', '11'],
+            '14/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10', '11', '12'],
+            '15/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10', '11', '12', '13']
+          },
+          'negocio.usuario.saludos.adios3': {
+            '03/01/2020': ['chau'],
+            '04/01/2020': ['chau', 'Chau!'],
+            '05/01/2020': ['chau', 'Chau!', 'chau nos vemos'],
+            '06/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima'],
+            '07/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5'],
+            '08/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6'],
+            '09/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7'],
+            '10/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8'],
+            '11/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9'],
+            '12/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10'],
+            '13/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10', '11'],
+            '14/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10', '11', '12'],
+            '15/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10', '11', '12', '13']
+          },
+          'negocio.usuario.saludos.adios4': {
+            '03/01/2020': ['chau'],
+            '04/01/2020': ['chau', 'Chau!'],
+            '05/01/2020': ['chau', 'Chau!', 'chau nos vemos'],
+            '06/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima'],
+            '07/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5'],
+            '08/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6'],
+            '09/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7'],
+            '10/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8'],
+            '11/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9'],
+            '12/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10'],
+            '13/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10', '11'],
+            '14/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10', '11', '12'],
+            '15/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10', '11', '12', '13']
+          },
+          'negocio.usuario.saludos.adios5': {
+            '03/01/2020': ['chau'],
+            '04/01/2020': ['chau', 'Chau!'],
+            '05/01/2020': ['chau', 'Chau!', 'chau nos vemos'],
+            '06/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima'],
+            '07/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5'],
+            '08/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6'],
+            '09/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7'],
+            '10/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8'],
+            '11/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9'],
+            '12/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10'],
+            '13/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10', '11'],
+            '14/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10', '11', '12'],
+            '15/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10', '11', '12', '13']
+          },
+          'negocio.usuario.saludos.adios6': {
+            '03/01/2020': ['chau'],
+            '04/01/2020': ['chau', 'Chau!'],
+            '05/01/2020': ['chau', 'Chau!', 'chau nos vemos'],
+            '06/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima'],
+            '07/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5'],
+            '08/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6'],
+            '09/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7'],
+            '10/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8'],
+            '11/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9'],
+            '12/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10'],
+            '13/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10', '11'],
+            '14/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10', '11', '12'],
+            '15/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10', '11', '12', '13']
+          },
+          'negocio.usuario.saludos.adios7': {
+            '03/01/2020': ['chau'],
+            '04/01/2020': ['chau', 'Chau!'],
+            '05/01/2020': ['chau', 'Chau!', 'chau nos vemos'],
+            '06/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima'],
+            '07/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5'],
+            '08/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6'],
+            '09/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7'],
+            '10/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8'],
+            '11/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9'],
+            '12/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10'],
+            '13/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10', '11'],
+            '14/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10', '11', '12'],
+            '15/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10', '11', '12', '13']
+          },
+          'negocio.usuario.saludos.adios8': {
+            '03/01/2020': ['chau'],
+            '04/01/2020': ['chau', 'Chau!'],
+            '05/01/2020': ['chau', 'Chau!', 'chau nos vemos'],
+            '06/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima'],
+            '07/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5'],
+            '08/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6'],
+            '09/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7'],
+            '10/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8'],
+            '11/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9'],
+            '12/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10'],
+            '13/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10', '11'],
+            '14/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10', '11', '12'],
+            '15/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10', '11', '12', '13']
+          },
+          'negocio.usuario.saludos.adios9': {
+            '03/01/2020': ['chau'],
+            '04/01/2020': ['chau', 'Chau!'],
+            '05/01/2020': ['chau', 'Chau!', 'chau nos vemos'],
+            '06/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima'],
+            '07/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5'],
+            '08/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6'],
+            '09/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7'],
+            '10/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8'],
+            '11/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9'],
+            '12/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10'],
+            '13/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10', '11'],
+            '14/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10', '11', '12'],
+            '15/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10', '11', '12', '13']
+          },
+          'negocio.usuario.saludos.adios10': {
+            '03/01/2020': ['chau'],
+            '04/01/2020': ['chau', 'Chau!'],
+            '05/01/2020': ['chau', 'Chau!', 'chau nos vemos'],
+            '06/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima'],
+            '07/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5'],
+            '08/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6'],
+            '09/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7'],
+            '10/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8'],
+            '11/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9'],
+            '12/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10'],
+            '13/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10', '11'],
+            '14/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10', '11', '12'],
+            '15/01/2020': ['chau', 'Chau!', 'chau nos vemos', 'Chau, hasta la proxima', '5', '6', '7', '8', '9', '10', '11', '12', '13']
           }
         };
         let cols = [], rows = Object.keys(info);
         const iniTop = 50;
         const maxCols = 6, maxRows = 10;
-        const firstColWidth = 200, firstRowHeight = 45;
+        const firstColWidth = 220, firstRowHeight = 45;
         let width = 85, height = 50, maxWidth = 150, maxHeight = 80;
-        let currRow = null, currCol = null, currDiffX = 0, currDiffY = 0;
+        let currRow = null, currCol = null, currDiffX = 0, currDiffY = 0, currPageX = 1, currPageY = 1;
         setCols();
         const actualCols = Math.min(maxCols, cols.length);
         const actualRows = Math.min(maxRows, rows.length);
         const pagesX = Math.ceil(cols.length / actualCols);
         const pagesY = Math.ceil(rows.length / actualRows);
-        const buttonWidth = 25, buttonHeight = 20, buttonsBottom = actualCols + 2, buttonsRight = actualRows + 2;
+        const buttonWidth = 25, buttonHeight = 20, buttonsBottom = pagesX + 2, buttonsRight = pagesY + 2;
         const buttonSelected = { borderWidth: '2px', zIndex: 2 };
         const buttonUnselected = { borderWidth: '0.5px', zIndex: 1 };
         resize();
@@ -146,7 +291,7 @@
             cell.style.top = `${iniTop + firstRowHeight + k * height}px`;
             cell.style.width = `${firstColWidth}px`;
             cell.style.height = `${height}px`;
-            cell.innerHTML = rows[k];
+            cell.innerHTML = rows[k - currDiffY];
             document.body.appendChild(cell);
           }
         }
@@ -163,7 +308,7 @@
           }
         }
         function isCellVisible(row, col) {
-          return !(row + 1 + currDiffY > actualRows || col + 1 + currDiffX > actualCols);
+          return !(row + 1 + currDiffY > actualRows || col + 1 + currDiffX > actualCols) && col >= -currDiffX && row >= -currDiffY;
         }
         function isCellRight(col) {
           return col + currDiffX === actualCols - 1;
@@ -182,7 +327,7 @@
               cell.style.top = `${iniTop + firstRowHeight + (k + currDiffY) * height}px`;
               cell.style.width = `${isCellRight(m) ? width - buttonWidth : width}px`;
               cell.style.height = `${isCellBottom(k) ? height - buttonHeight : height}px`;
-              cell.style.opacity = isCellVisible(k, m) ? 1 : 0;
+              cell.style.display = isCellVisible(k, m) ? 'block' : 'none';
               cell.innerHTML = info[rows[k]][cols[m]] ? info[rows[k]][cols[m]].length : 0;
               document.body.appendChild(cell);
             }
@@ -228,7 +373,7 @@
         }
         function resize() {
           width = Math.min((innerWidth - firstColWidth) / actualCols, maxWidth);
-          height = Math.min((innerHeight - firstRowHeight) / actualRows, maxHeight);
+          height = Math.min((innerHeight - firstRowHeight - iniTop) / actualRows, maxHeight);
           setFirstCol();
           setFirstRow();
           setTable();
@@ -244,37 +389,67 @@
             }
           }
         }
-        function unSelectPage(x, y) {
-          const buttonRight = document.getElementById(`buttonRight_${y}`);
+        function unSelectPageX(x) {
           const buttonBottom = document.getElementById(`buttonBottom_${x}`);
-          setStyle(buttonUnselected, buttonRight);
           setStyle(buttonUnselected, buttonBottom);
         }
-        function selectPage(x, y) {
+        function unSelectPageY(y) {
           const buttonRight = document.getElementById(`buttonRight_${y}`);
+          setStyle(buttonUnselected, buttonRight);
+        }
+        function selectPageX(x) {
           const buttonBottom = document.getElementById(`buttonBottom_${x}`);
-          setStyle(buttonSelected, buttonRight);
           setStyle(buttonSelected, buttonBottom);
+        }
+        function selectPageY(y) {
+          const buttonRight = document.getElementById(`buttonRight_${y}`);
+          setStyle(buttonSelected, buttonRight);
+        }
+        function cannotMoveX(diff) {
+          return cols.length - actualCols + currDiffX + diff < 0 || currDiffX + diff > 0;
+        }
+        function cannotMoveY(diff) {
+          return rows.length - actualRows + currDiffY + diff < 0 || currDiffY + diff > 0;
         }
         function move(diffX, diffY) {
           // TODO remove console
-          console.log(`Move ${diffX}, ${diffY}`);
-          
-          diffX = diffX || 0;
-          diffY = diffY || 0;
-          if (cols.length - actualCols + currDiffX + diffX < 0 || currDiffX + diffX > 0 ||
-              rows.length - actualRows + currDiffY + diffY < 0 || currDiffY + diffY > 0) {
-            return;
+          // console.log(`Req diff ${diffX}, ${diffY}`);
+          const isLastCol = cols.length - actualCols === -currDiffX;
+          const isLastRow = rows.length - actualRows === -currDiffY;
+          if (diffX === 0 || currPageX < pagesX && diffX < 0 || currPageX > 1 && diffX > 0) {
+            unSelectPageX(currPageX);
+            currPageX -= diffX || 0;
+            selectPageX(currPageX);
           }
-          unSelectPage(-currDiffX + 1, -currDiffY + 1);
+          if (diffY === 0 || currPageY < pagesY && diffY < 0 || currPageY > 1 && diffY > 0) {
+            unSelectPageY(currPageY);
+            currPageY -= diffY || 0;
+            selectPageY(currPageY);
+          }
+          diffX = (diffX || 0) * actualCols;
+          diffY = (diffY || 0) * actualRows;
+          const conditionMoveX = !cannotMoveX(diffX);
+          const conditionMoveY = !cannotMoveY(diffY);
+          if (diffX < 0) {
+            diffX = conditionMoveX ? diffX : -(cols.length + currDiffX - actualCols);
+          } else if(diffX > 0) {
+            diffX = conditionMoveX ? diffX : -currDiffX;
+          }
+          if (diffY < 0) {
+            diffY = conditionMoveY ? diffY : -(rows.length + currDiffY - actualRows);
+          } else if(diffY > 0) {
+            diffY = conditionMoveY ? diffY : -currDiffY;
+          }
+          // TODO remove console
+          // console.log(`Move ${diffX}, ${diffY}`);
+          
           currDiffX += diffX || 0;
           currDiffY += diffY || 0;
-          selectPage(-currDiffX + 1, -currDiffY + 1);
           for (let k = 0; k < rows.length; k += 1) {
             for (let m = 0; m < cols.length; m += 1) {
               const cell = document.getElementById(`${k}_${m}`);
               if (cell) {
-                cell.style.opacity = isCellVisible(k, m) ? 1 : 0;
+                cell.style.display = isCellVisible(k, m) ? 'block' : 'none';
                 cell.style.left = `${firstColWidth + (m + currDiffX) * width}`;
                 cell.style.top = `${iniTop + firstRowHeight + (k + currDiffY) * height}px`;
                 cell.style.width = `${isCellRight(m) ? width - buttonWidth : width}px`;
@@ -292,7 +467,7 @@
           for (let k = 0; k < buttonsBottom; k += 1) {
             const button = document.getElementById(`buttonBottom_${k}`) || document.createElement('div');
             button.id = `buttonBottom_${k}`;
-            button.setAttribute('class', 'cell');
+            button.setAttribute('class', 'cell button');
             button.style.width = `${buttonWidthThis}px`;
             button.style.height = `${buttonHeight}px`;
             button.style.left = `${firstColWidth + k * buttonWidthThis}px`;
@@ -302,12 +477,12 @@
                 button.innerHTML = '&larr;';
                 button.setAttribute('onclick', 'move(1, 0)');
                 break;
-              case k === buttonsBottom - 1:
+              case buttonsBottom - 1:
                 button.innerHTML = '&rarr;';
                 button.setAttribute('onclick', 'move(-1, 0)');
                 break;
               default:
-                button.setAttribute('onclick', `move(${k - (-currDiffX + 1)}, 0)`);
+                button.setAttribute('onclick', `move(${currPageX - k}, 0)`);
                 button.innerHTML = k;
                 break;
             }
@@ -319,19 +494,24 @@
           for (let k = 0; k < buttonsRight; k += 1) {
             const button = document.getElementById(`buttonRight_${k}`) || document.createElement('div');
             button.id = `buttonRight_${k}`;
-            button.setAttribute('class', 'cell');
+            button.setAttribute('class', 'cell button');
             button.style.width = `${buttonWidth}px`;
             button.style.height = `${buttonHeightThis}px`;
             button.style.left = `${firstColWidth + actualCols * width - buttonWidth}px`;
             button.style.top = `${iniTop + firstRowHeight + k * buttonHeightThis}px`;
-            button.innerHTML = k;
-            if (k === 0) {
-              button.innerHTML = '&uarr;';
-              button.setAttribute('onclick', 'move(0, 1)');
-            }
-            if (k === buttonsRight - 1) {
-              button.innerHTML = '&darr;';
-              button.setAttribute('onclick', 'move(0, -1)');
+            switch (k) {
+              case 0:
+                button.innerHTML = '&uarr;';
+                button.setAttribute('onclick', 'move(0, 1)');
+                break;
+              case buttonsRight - 1:
+                button.innerHTML = '&darr;';
+                button.setAttribute('onclick', 'move(0, -1)');
+                break;
+              default:
+                button.setAttribute('onclick', `move(0, ${currPageY - k})`);
+                button.innerHTML = k;
+                break;
             }
             document.body.appendChild(button);
           }
