@@ -151,6 +151,8 @@
         .messages {
           width: 98%;
           height: 91%;
+          height: auto;
+          min-height: 50px !important;
           position: absolute;
           transform: translate(-50%);
           left: 50%;
@@ -163,12 +165,11 @@
           position: absolute;
           width: 36%;
           height: auto;
-          min-height: 75px;
+          min-height: 2% !important;
           border-style: solid;
           border-width: 2px;
           border-radius: 7px;
           background-color: #DDD;
-          word-wrap: break-word;
           top: 50px;
         }
         .bubbleBot {
@@ -208,10 +209,7 @@
       </div>
       <div class = 'reviewMenu'>
         <div class = 'title titleConv'>N&uacute;mero de tel&eacute;fono</div>
-        <div class = 'messages' id = 'messages'>
-          <div class = 'bubble bubbleBot' id = 'test' style="height: auto;"><div class = 'bubbleTriangle bubbleTriangleBot'></div></div>
-          <div class = 'bubble bubbleUser'><div class = 'bubbleTriangle bubbleTriangleUser'></div></div>
-        </div>
+        <div class = 'messages' id = 'messages'></div>
       </div>
       <script>
         const msg = document.getElementById('msg');
