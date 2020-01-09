@@ -204,6 +204,23 @@
         .bubbleTriangleUser {
           left: 75%;
         }
+        .arrow {
+          position: absolute;
+          width: 20px;
+          height: 20px;
+          background-color: #5F5;
+          font-size: 20px;
+          top: 0;
+          cursor: pointer;
+          border-style: solid;
+          border-width: 1px;
+        }
+        .arrowLeft {
+          left: 20px;
+        }
+        .arrowRight {
+          left: 45px;
+        }
       </style>
     </head>
     <body oncontextmenu = 'return false;' onresize = 'resize();' onmousewheel = 'moveScrolling(event)'>
@@ -215,6 +232,8 @@
         <table class = 'list' id = 'list'></table>
       </div>
       <div class = 'reviewMenu' id = 'reviewMenu'>
+        <div class = 'arrow arrowLeft' onclick = 'changeConv(-1)'>&larr;</div>
+        <div class = 'arrow arrowRight' onclick = 'changeConv(1)'>&rarr;</div>
         <div class = 'close' onclick = 'closeReviewMenu();'>&times;</div>
         <div class = 'title titleConv' id = 'reviewMenuTitle'>N&uacute;mero de tel&eacute;fono</div>
         <div class = 'messages' id = 'messages'></div>
@@ -245,7 +264,7 @@
         const buttonSelected = { borderWidth: '2.8px', zIndex: 2 };
         const buttonUnselected = { borderWidth: '0.5px', zIndex: 1 };
         const reviewHeightCoef = 0.85, bubbleIniTop = 20, bubbleSep = 10;
-        let currPhrase = null;
+        let currPhrase = null, currDate = null;
         resize();
         function setCols() {
           cols = {};
@@ -341,7 +360,7 @@
           for (let k = 0; k < phrases.length; k += 1) {
             if (!insertedPhrases.includes(phrases[k])) {
               phrases[k] = phrases[k].replace(/\n/g, '\\n');
-              list.innerHTML += `<tr><td>${phrases[k]}</td><td align = 'center'>${occInArr(phrases, phrases[k])}</td><td class = 'buttonReview' onselectstart = 'return false;' onclick = 'openReviewMenu("${phrases[k]}", "${cols[col]}");'>Revisar</td></tr>`;
+              list.innerHTML += `<tr><td>${phrases[k]}</td><td align = 'center'>${occInArr(phrases, phrases[k])}</td><td class = 'buttonReview' onselectstart = 'return false;' onclick = 'openReviewMenu("${phrases[k]}", "${cols[col]}", currIndex);'>Revisar</td></tr>`;
               insertedPhrases.push(phrases[k]);
             }
           }
@@ -512,20 +531,33 @@
           }
           return phones;
         }
-        function openReviewMenu(phrase, date) {
-          console.log(phrase, date);
+        let currIndex = 0;
+        function changeConv(diff) {
+          currIndex += diff;
+          openReviewMenu(currPhrase, currDate, currIndex);
+        }
+        function openReviewMenu(phrase, date, index) {
           const phones = getPhones(phrase, date);
-          const [phone] = phones;
-          const phoneNum = phone.substring(phone.indexOf(':') + 1);
-
-          if (currPhrase === phrase) {
-            reviewMenu.style.top = '100%';
-            currPhrase = null;
-          } else {
-            reviewMenu.style.top = `${innerHeight * (1 - reviewHeightCoef)}px`;
-            currPhrase = phrase;
-            reviewMenuTitle.innerHTML = `+${phoneNum.substring(0, 2)} ${phoneNum.substring(2, 3)} ${phoneNum.substring(3, 5)} ${phoneNum.substring(5, 9)} - ${phoneNum.substring(9)}`
+          let phone = phones[index];
+          if (!phone) {
+            console.log(`no ${index}`);
+            currIndex = 0;
+            [phone] = phones;
+            index = 0;
+            
           }
+          console.log(phone, index, phones.length);
+          
+          const phoneNum = phone.substring(phone.indexOf(':') + 1);
+          
+          console.log(phoneNum);
+          if (currPhrase === phrase) {
+          } else {
+          }
+          reviewMenu.style.top = `${innerHeight * (1 - reviewHeightCoef)}px`;
+          currPhrase = phrase;
+          currDate = date;
+          reviewMenuTitle.innerHTML = `+${phoneNum.substring(0, 2)} ${phoneNum.substring(2, 3)} ${phoneNum.substring(3, 5)} ${phoneNum.substring(5, 9)} - ${phoneNum.substring(9)}`
           const conv = convs[phone];
           let topSum = 0;
           messages.innerHTML = '';
@@ -555,7 +587,9 @@
           }
         }
         function moveScrolling(e) {
-          move(0, e.wheelDeltaY < 0 ? -1 : 1);
+          if (currPhrase === null) {
+            move(0, e.wheelDeltaY < 0 ? -1 : 1);
+          }
         }
       </script>
     </body>
