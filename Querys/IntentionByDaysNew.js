@@ -18,13 +18,14 @@ var apiais = db.getCollection('apiais').find(
     {
         chatbotName: 'Edes-Institucional-Web',
         chatbotChannel: 'whatsapp',
+        action: { $nin: ['input.ignored', 'input.ignored.automatic'] },
         lastUpdate: {
             $gte: ISODate("2019-12-30T00:00:00.000Z"),
             $lt: ISODate("2020-01-09T00:00:00.000Z"),
         }
     }, { action: 1, _id: 0, webMessageInput: 1, lastUpdate: 1, whatsappEventSenderId: 1 }
 ).toArray();
-var data = {}, convs = {}, numbers = [];
+var data = {}, convs = {}, numbers = [], actions = [];
 for (var k = 0; k < apiais.length; k += 1) {
     const year = apiais[k].lastUpdate.getFullYear();
     const month = apiais[k].lastUpdate.getMonth() + 1;
@@ -39,6 +40,9 @@ for (var k = 0; k < apiais.length; k += 1) {
     data[apiais[k].action][date].push(apiais[k].webMessageInput);
     if (!numbers.includes(apiais[k].whatsappEventSenderId)) {
         numbers.push(apiais[k].whatsappEventSenderId);
+    }
+    if (!actions.includes(apiais[k].action)) {
+        actions.push(apiais[k].action);
     }
 }
 var convs = db.getCollection('apiais').find(
@@ -56,5 +60,18 @@ for (var k = 0; k < convs.length; k += 1) {
     convs[k].lastUpdate = getDate(convs[k].lastUpdate, true);
     byNumber[phone].push(convs[k]);
 }
+actions;
+var answers = db.getCollection('messages').find(
+    {
+        chatbotName: 'Edes-Institucional-Web',
+        action: { $in: actions },
+        'whatsapp.typeText.messageData': { $exists: true }
+    }, { action: 1, _id: 0, 'whatsapp.typeText.messageData': 1 }
+).toArray();
+var answersOk = {};
+for (var k = 0; k < answers.length; k += 1) {
+    answersOk[answers[k].action] = answers[k].whatsapp.typeText.messageData;
+}
 data;
 byNumber;
+answersOk;
