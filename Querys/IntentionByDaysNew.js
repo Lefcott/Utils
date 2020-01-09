@@ -20,7 +20,7 @@ var apiais = db.getCollection('apiais').find(
         chatbotChannel: 'whatsapp',
         lastUpdate: {
             $gte: ISODate("2019-12-30T00:00:00.000Z"),
-            $lt: ISODate("2020-01-08T00:00:00.000Z"),
+            $lt: ISODate("2020-01-09T00:00:00.000Z"),
         }
     }, { action: 1, _id: 0, webMessageInput: 1, lastUpdate: 1, whatsappEventSenderId: 1 }
 ).toArray();
