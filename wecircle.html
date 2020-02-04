@@ -8,8 +8,9 @@
         border: 2px solid #466CFF;
         border-radius: 5px;
         opacity: 1;
-        width: 137px;
-        height: 32.5px;
+        width: 35%;
+        height: auto;
+        min-height: 50px;
         cursor: pointer;
       }
       .buttonTextContainer {
@@ -17,7 +18,7 @@
         transform: translate(-50%, -50%);
         left: 50%;
         top: 50%;
-        font: Bold 16px Quicksand;
+        font: Bold 5vw Quicksand;
         letter-spacing: 0;
         color: #466CFF;
       }
@@ -33,7 +34,7 @@
       }
       #buttonEnviar {
         position: absolute;
-        top: 120%;
+        top: 105%;
       }
       #formContainer {
         position: absolute;
@@ -161,8 +162,9 @@
       const buttonEnviar = document.getElementById('buttonEnviar');
       const formText = document.getElementsByClassName('formText');
       const formInput = document.getElementsByClassName('formInput');
+      const buttonTextContainer = document.getElementsByClassName('buttonTextContainer');
       function resize() {
-        if (innerWidth < innerHeight) {
+        if (innerWidth < innerHeight) { // WEB
           const logoWidth = innerWidth * 0.55;
           logo.style.width = `50%`;
           // FIRST PAGE
@@ -182,9 +184,12 @@
             formText[k].style.fontSize = '5vw';
           }
           for (let k = 0; k < formInput.length; k += 1) {
-            formInput[k].style.height = formInput[k].id === 'comment' ? '150px' : '50px';
+            formInput[k].style.height = formInput[k].id === 'comment' ? '250px' : '50px';
           }
-        } else {
+          for (let k = 0; k < buttonTextContainer.length; k += 1) {
+            buttonTextContainer[k].style.font = 'Bold 5vw Quicksand';
+          }
+        } else { // MOBILE
           // FIRST PAGE
           paragraphContainer.style.width = '55%';
           paragraphTitle.style.fontSize = '3vw';
@@ -193,7 +198,7 @@
           buttonHablemos.style.transform = 'translate(-100%, 0)';
           buttonHablemos.style.left = '100%';
           // CONTACT PAGE
-          formContainer.style.width = '30%';
+          formContainer.style.width = '40%';
           formTitle.style.fontSize = '4vw';
           formTitle.style.textAlign = 'left';
           buttonEnviar.style.transform = 'translate(-100%, 0)';
@@ -202,7 +207,10 @@
             formText[k].style.fontSize = '2vw';
           }
           for (let k = 0; k < formInput.length; k += 1) {
-            formInput[k].style.height = formInput[k].id === 'comment' ? '90px' : '30px';
+            formInput[k].style.height = formInput[k].id === 'comment' ? '120px' : '30px';
+          }
+          for (let k = 0; k < buttonTextContainer.length; k += 1) {
+            buttonTextContainer[k].style.font = 'Bold 2.5vw Quicksand';
           }
         }
       }
