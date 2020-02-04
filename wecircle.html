@@ -23,8 +23,9 @@
       }
       #logo {
         position: absolute;
-        top: 58px;
+        top: 20px;
         left: 5%;
+        height: auto;
       }
       #buttonHablemos {
         position: absolute;
@@ -148,6 +149,7 @@
       </div>
     </div>
     <script>
+      const logo = document.getElementById('logo');
       // FIRST PAGE
       const paragraphContainer = document.getElementById('paragraphContainer');
       const paragraphText = document.getElementById('paragraphText');
@@ -161,6 +163,8 @@
       const formInput = document.getElementsByClassName('formInput');
       function resize() {
         if (innerWidth < innerHeight) {
+          const logoWidth = innerWidth * 0.55;
+          logo.style.width = `50%`;
           // FIRST PAGE
           paragraphContainer.style.width = '95%';
           paragraphTitle.style.fontSize = '6vw';
