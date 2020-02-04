@@ -33,7 +33,6 @@
       }
       #buttonEnviar {
         position: absolute;
-        top: 105%;
       }
       #formContainer {
         position: absolute;
@@ -204,6 +203,7 @@
             formInput[k].style.borderWidth = '2px';
           }
           for(let k = 0; k < button.length; k += 1) {
+            button[k].style.top = '105%';
             button[k].style.minHeight = '115px';
             button[k].style.borderRadius = '10px';
             button[k].style.border = '4px solid #466CFF';
@@ -245,10 +245,11 @@
             formInput[k].style.borderWidth = '1px';
           }
           for(let k = 0; k < button.length; k += 1) {
-            button[k].style.minHeight = '50px';
+            button[k].style.top = '98%';
+            button[k].style.minHeight = '45px';
             button[k].style.borderRadius = '5px';
             button[k].style.border = '2px solid #466CFF';
-            button[k].style.width = '40%';
+            button[k].style.width = '35%';
           }
           for (let k = 0; k < buttonTextContainer.length; k += 1) {
             buttonTextContainer[k].style.font = 'Bold 2.5vw Quicksand';
