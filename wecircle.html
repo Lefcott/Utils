@@ -88,7 +88,6 @@
         transform: translate(-100%, -100%);
         left: 100%;
         top: 100%;
-        min-width: 350px;
       }
       #bigImage_contact {
         position: absolute;
@@ -175,6 +174,7 @@
       const buttonEnviar = document.getElementById('buttonEnviar');
       const formText = document.getElementsByClassName('formText');
       const formInput = document.getElementsByClassName('formInput');
+      const tabletRelation = [0.6188, 1];
       function resize() {
         if (innerWidth < innerHeight) { // MOBILE
           logo.style.maxWidth = `350px`;
@@ -211,7 +211,7 @@
             formInput[k].style.borderWidth = '2px';
           }
           for(let k = 0; k < button.length; k += 1) {
-            button[k].style.minHeight = '115px';
+            button[k].style.height = `${innerWidth * 0.12}px`;
             button[k].style.borderRadius = '10px';
             button[k].style.border = '4px solid #466CFF';
             button[k].style.width = '50%';
@@ -232,7 +232,7 @@
           paragraphTitle.style.fontSize = '3vw';
           paragraphTitle.style.textAlign = 'left';
           paragraphTitle.innerHTML = 'AYUDAMOS A ORGANIZACIONES<br>A REDUCIR SU HUELLA DE PL&Aacute;STICO';
-          paragraphText.style.fontSize = '2vw';
+          paragraphText.style.fontSize = '1.5vw';
           paragraphText.style.textAlign = 'left';
           paragraphText.innerHTML = 'El pl&aacute;stico es uno de los principales causantes del cambio clim&aacute;tico, que es una relaidad y requiere acci&oacute;n inmediata. El camino a limitarlo es circular, y compa&ntilde;&iacute;as, ciudades y organizaciones de todo el mundo ya lo est&aacute;n transitando.<br><p class = "boldText">En WeCircular contamos con soluciones para abordar de forma integral el consumo de pl&aacute;stico en tu organizaci&oacute;n</p>'
           buttonHablemos.style.top = '105%';
@@ -257,7 +257,7 @@
             formInput[k].style.borderWidth = '1px';
           }
           for(let k = 0; k < button.length; k += 1) {
-            button[k].style.minHeight = '45px';
+            button[k].style.height = `${innerWidth * 0.05}px`;
             button[k].style.borderRadius = '5px';
             button[k].style.border = '2px solid #466CFF';
             button[k].style.width = '35%';
@@ -275,7 +275,10 @@
           bigImage.style.top = `${document.body.scrollHeight}px`;
           bigImageContact.style.top = `${document.body.scrollHeight}px`;
         }, 5);
-        
+        const relation = innerWidth / innerHeight;
+        if (relation >= tabletRelation[0] && relation <= tabletRelation[1]) {
+          bigImage.style.width = '35%';
+        }
       }
       function changeScreen(lastScreen, newScreen) {
         resize();
