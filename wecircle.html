@@ -36,7 +36,10 @@
       #buttonEnviar {
         position: absolute;
         top: 105%;
-        margin-bottom: 7%;
+        margin-bottom: 14%;
+      }
+      #comment {
+        margin-bottom: 12%;
       }
       #formContainer {
         position: absolute;
@@ -192,7 +195,7 @@
           bigImage.style.width = '100%';
           // CONTACT PAGE
           formContainer.style.top = '15%'
-          formContainer.style.width = '80%';
+          formContainer.style.width = '70%';
           formTitle.style.fontSize = '6vw';
           formTitle.style.textAlign = 'center';
           buttonEnviar.style.transform = 'translate(0, 0)';
@@ -249,7 +252,7 @@
           }
           for (let k = 0; k < formInput.length; k += 1) {
             formInput[k].style.height = formInput[k].id === 'comment' ? '120px' : '42px';
-            formInput[k].style.fontSize = '20px';
+            formInput[k].style.fontSize = '18px';
             formInput[k].style.borderRadius = '6px';
             formInput[k].style.borderWidth = '1px';
           }
