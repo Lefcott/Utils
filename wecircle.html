@@ -278,6 +278,16 @@
         const relation = innerWidth / innerHeight;
         if (relation >= tabletRelation[0] && relation <= tabletRelation[1]) {
           bigImage.style.width = '35%';
+          paragraphText.style.fontSize = '2.9vw';
+          for(let k = 0; k < button.length; k += 1) {
+            button[k].style.height = `${innerWidth * 0.05}px`;
+            button[k].style.borderRadius = '5px';
+            button[k].style.border = '2px solid #466CFF';
+            button[k].style.width = '35%';
+            setTimeout(() => {
+              button[k].style.transition = '0.5s';
+            }, 5);
+          }
         }
       }
       function changeScreen(lastScreen, newScreen) {
