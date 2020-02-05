@@ -88,10 +88,9 @@
         min-width: 350px;
       }
       #bigImage_contact {
-        position: fixed;
+        position: absolute;
         transform: translate(-100%, -100%);
         left: 100%;
-        top: 100%;
         width: 40%;
         min-width: 350px;
       }
@@ -167,6 +166,7 @@
       const paragraphTitle = document.getElementById('paragraphTitle');
       const buttonHablemos = document.getElementById('buttonHablemos');
       const bigImage = document.getElementById('bigImage');
+      const bigImageContact = document.getElementById('bigImage_contact');
       // CONTACT PAGE
       const formContainer = document.getElementById('formContainer');
       const formTitle = document.getElementById('formTitle');
@@ -265,8 +265,19 @@
             buttonTextContainer[k].style.font = 'Bold 2.5vw Quicksand';
           }
         }
+        bigImage.style.top = 0;
+        bigImageContact.style.top = 0;
+        setTimeout(() => {
+          bigImage.style.top = `${document.body.scrollHeight}px`;
+          bigImageContact.style.top = `${document.body.scrollHeight}px`;
+        }, 5);
+        // TODO remove console
+        console.log(bigImage.style.top);
+        console.log(bigImageContact.style.top);
+        
       }
       function changeScreen(lastScreen, newScreen) {
+        resize();
         document.getElementById(lastScreen).style.display = 'none';
         document.getElementById(newScreen).style.display = 'block';
       }
