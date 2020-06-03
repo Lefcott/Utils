@@ -1,190 +1,269 @@
 <html>
-    <style>
-    textarea{
-        position: absolute;
-        width: 50%;
-        height: 370px;
-        top: 0;
+  <style>
+    textarea {
+      position: absolute;
+      width: 50%;
+      height: 370px;
+      top: 0;
     }
-    #text{
-        left: 0;
+    #text {
+      left: 0;
     }
-    #result{
-        left: 50%;
+    #result {
+      left: 50%;
     }
-    input[type=button]{
-        width: 200px;
-        height: 40px;
-        font-size: 25px;
-        position: absolute;
-        transform: translate(-50%);
+    input[type="button"] {
+      width: 200px;
+      height: 40px;
+      font-size: 25px;
+      position: absolute;
+      transform: translate(-50%);
     }
-    #parse{
-        left: 50%;
-        top: 380px;
+    #parse {
+      left: 50%;
+      top: 380px;
     }
-    #parse2{
-        left: 50%;
-        top: 430px;
+    #parse2 {
+      left: 50%;
+      top: 430px;
     }
-    #parse3{
-        left: 50%;
-        top: 480px;
+    #parse3 {
+      left: 50%;
+      top: 480px;
     }
-    #parse4{
-        left: 50%;
-        top: 530px;
+    #parse4 {
+      left: 50%;
+      top: 530px;
     }
-    #parse5{
-        left: 50%;
-        top: 580px;
+    #parse5 {
+      left: 50%;
+      top: 580px;
     }
-    #parse6{
-        left: 50%;
-        top: 630px;
+    #parse6 {
+      left: 50%;
+      top: 630px;
     }
-    #parse7{
-        left: 50%;
-        top: 680px;
+    #parse7 {
+      left: 50%;
+      top: 680px;
     }
-    #parse8{
-        left: 50%;
-        top: 680px;
+    #parse8 {
+      left: 50%;
+      top: 680px;
     }
-    #parse9{
-        left: 50%;
-        top: 730px;
+    #parse9 {
+      left: 50%;
+      top: 730px;
     }
-    #parse10{
-        left: 50%;
-        top: 780px;
+    #parse10 {
+      left: 50%;
+      top: 780px;
     }
-    #parse11{
-        left: 50%;
-        top: 830px;
+    #parse11 {
+      left: 50%;
+      top: 830px;
     }
-    #parse12{
-        left: 50%;
-        top: 880px;
+    #parse12 {
+      left: 50%;
+      top: 880px;
     }
-    #parse13{
-        left: 50%;
-        top: 930px;
+    #parse13 {
+      left: 50%;
+      top: 930px;
     }
-    body{
-        overflow-x: hidden;
-        overflow-y: scroll;
+    #parse14 {
+      left: 50%;
+      top: 980px;
     }
-    </style>
-    <body>
-        <textarea id = "text"></textarea>
-        <textarea id = "result"></textarea>
-        <input type = "text" id = "excludes" value = " |">
-        <input  type = "button" onclick = "parse();" value = "Parse" id = "parse">
-        <input  type = "button" onclick = "parse2();" value = "Messages" id = "parse2">
-        <input  type = "button" onclick = "parse3();" value = "Parse 3" id = "parse3">
-        <input  type = "button" onclick = "parse4();" value = "'export' to 'echo'" id = "parse4">
-        <input  type = "button" onclick = "parse5();" value = "parse5" id = "parse5">
-        <input  type = "button" onclick = "parse6();" value = "Get Analytics" id = "parse6">
-        <input  type = "button" onclick = "parse7();" value = "Intent-Vs-Msg" id = "parse7">
-        <input  type = "button" onclick = "parse8();" value = "Join Array" id = "parse8">
-        <input  type = "button" onclick = "parse9();" value = "Max-Len-Str" id = "parse9">
-        <input  type = "button" onclick = "parse10();" value = "Mongo-To-Arr" id = "parse10">
-        <input  type = "button" onclick = "parse11();" value = "Obj-Arr_To-Values" id = "parse11">
-        <input  type = "button" onclick = "parse12();" value = "Split lines" id = "parse12">
-        <input  type = "button" onclick = "parse13();" value = "Split with sep" id = "parse13">
-        <script type = "text/javascript">
-            var charChecks = [
-                "{['\"[",
-                "]\"']}",
-            ];
-            document.getElementById('text').value = "Test message number " + charChecks[0] + "5" + charChecks[1]
-            function parse(){
-                var text = document.getElementById("text");
-                var excludes = document.getElementById("excludes").value.split("");
-                var result = 
-                    text.value.split("\n").map(line => {
-                        return "'" + exclude(line, excludes) + "',\n";
-                    }).join("");
-                document.getElementById("result").value = "(" + result.substring(0, result.length - 2) + ")";
+    body {
+      overflow-x: hidden;
+      overflow-y: scroll;
+    }
+  </style>
+  <body>
+    <textarea id="text"></textarea>
+    <textarea id="result"></textarea>
+    <input type="text" id="excludes" value=" |" />
+    <input type="button" onclick="parse();" value="Parse" id="parse" />
+    <input type="button" onclick="parse2();" value="Messages" id="parse2" />
+    <input type="button" onclick="parse3();" value="Parse 3" id="parse3" />
+    <input
+      type="button"
+      onclick="parse4();"
+      value="'export' to 'echo'"
+      id="parse4"
+    />
+    <input type="button" onclick="parse5();" value="parse5" id="parse5" />
+    <input
+      type="button"
+      onclick="parse6();"
+      value="Get Analytics"
+      id="parse6"
+    />
+    <input
+      type="button"
+      onclick="parse7();"
+      value="Intent-Vs-Msg"
+      id="parse7"
+    />
+    <input type="button" onclick="parse8();" value="Join Array" id="parse8" />
+    <input type="button" onclick="parse9();" value="Max-Len-Str" id="parse9" />
+    <input
+      type="button"
+      onclick="parse10();"
+      value="Mongo-To-Arr"
+      id="parse10"
+    />
+    <input
+      type="button"
+      onclick="parse11();"
+      value="Obj-Arr_To-Values"
+      id="parse11"
+    />
+    <input
+      type="button"
+      onclick="parse12();"
+      value="Split lines"
+      id="parse12"
+    />
+    <input
+      type="button"
+      onclick="parse13();"
+      value="Split with sep"
+      id="parse13"
+    />
+    <input
+      type="button"
+      onclick="parseString();"
+      value="String on JSON"
+      id="parse14"
+    />
+    <script type="text/javascript">
+      var charChecks = ["{['\"[", "]\"']}"];
+      document.getElementById("text").value =
+        "Test message number " + charChecks[0] + "5" + charChecks[1];
+      function parse() {
+        var text = document.getElementById("text");
+        var excludes = document.getElementById("excludes").value.split("");
+        var result = text.value
+          .split("\n")
+          .map((line) => {
+            return "'" + exclude(line, excludes) + "',\n";
+          })
+          .join("");
+        document.getElementById("result").value =
+          "(" + result.substring(0, result.length - 2) + ")";
+      }
+      function exclude(str, excludes) {
+        var newStr = "";
+        for (let k = 0; k < str.length; k++) {
+          newStr += excludes.indexOf(str[k]) == -1 ? str[k] : "";
+        }
+        return newStr;
+      }
+      function parse2() {
+        var text = document.getElementById("text");
+        var result = "[";
+        var previous = text.value.substring(
+          0,
+          text.value.indexOf(charChecks[0])
+        );
+        var next = text.value.substring(
+          text.value.indexOf(charChecks[1]) + charChecks[1].length
+        );
+        var upTo = parseInt(
+          text.value.substring(
+            text.value.indexOf(charChecks[0]) + charChecks[0].length,
+            text.value.indexOf(charChecks[1])
+          )
+        );
+        for (var a = 1; a <= upTo; a++) {
+          result += "\n        " + previous + a + next + ",";
+        }
+        document.getElementById("result").value =
+          result.substring(0, result.length - 1) + "\n    ]";
+      }
+      function parse3() {
+        var text = document.getElementById("text");
+        text.value =
+          text.value[text.value.length - 1] == "\n"
+            ? text.value.substring(0, text.value.length - 1)
+            : text.value;
+        var result =
+          "[\n" +
+          text.value
+            .split("\n")
+            .map((line) => {
+              return (
+                '        "' +
+                replaceAll(replaceAll(line, ["\\", "\\\\"]), ['"', '\\"']) +
+                '",\n'
+              );
+            })
+            .join("");
+        document.getElementById("result").value =
+          result.substring(0, result.length - 2) + "\n    ]";
+      }
+      function parse4() {
+        var text = document.getElementById("text");
+        var result = text.value
+          .split("\n")
+          .map((line) => {
+            return ignoreAfter(replaceAllStr(line, ["export ", "echo $"]), "=");
+          })
+          .join("\n");
+        document.getElementById("result").value = result + "\n";
+      }
+      function parse5() {
+        var text = document.getElementById("text");
+        var result = text.value
+          .split("\n")
+          .map((line) => {
+            var key = line.substring(line.indexOf(" ") + 1, line.indexOf("="));
+            return "export " + key + "=$" + key;
+          })
+          .join("\n");
+        document.getElementById("result").value = result + "\n";
+      }
+      function parse6() {
+        const text = document.getElementById("text");
+        const messages = JSON.parse(text.value);
+        const analytics = {};
+        const analyticsCollection = [];
+        for (let k = 0; k < messages.length; k++) {
+          if (messages[k].analytics) {
+            const category =
+              messages[k].analytics.googleAnalyticsClient.categoryEvent;
+            const action =
+              messages[k].analytics.googleAnalyticsClient.actionEvent;
+            const chatbotName = messages[k].chatbotName;
+            if (!analytics[chatbotName]) {
+              analytics[chatbotName] = {};
             }
-            function exclude(str, excludes){
-                var newStr = "";
-                for(let k = 0; k < str.length; k++){
-                    newStr += excludes.indexOf(str[k]) == -1 ? str[k] : "";
-                }
-                return newStr;
+            if (!analytics[chatbotName][category]) {
+              analytics[chatbotName][category] = [];
             }
-            function parse2(){
-                var text = document.getElementById("text");
-                var result = "[";
-                var previous = text.value.substring(0, text.value.indexOf(charChecks[0]));
-                var next = text.value.substring(text.value.indexOf(charChecks[1]) + charChecks[1].length);
-                var upTo = parseInt(text.value.substring(text.value.indexOf(charChecks[0]) + charChecks[0].length, text.value.indexOf(charChecks[1])));
-                for(var a = 1; a <= upTo; a++){
-                    result += '\n        ' + previous + a + next + ',';
-                }
-                document.getElementById("result").value = result.substring(0, result.length - 1) + "\n    ]";
+            if (!analytics[chatbotName][category].includes(action)) {
+              analytics[chatbotName][category].push(action);
             }
-            function parse3(){
-                var text = document.getElementById("text");
-                text.value = text.value[text.value.length - 1] == "\n" ? text.value.substring(0, text.value.length - 1) : text.value;
-                var result = "[\n" +
-                    text.value.split("\n").map(line => {
-                        return '        "' + replaceAll(replaceAll(line, ["\\", "\\\\"]), ['"', '\\"']) + '",\n';
-                    }).join("");
-                document.getElementById("result").value = result.substring(0, result.length - 2) + "\n    ]";
-            }
-            function parse4(){
-                var text = document.getElementById("text");
-                var result = text.value.split("\n").map(line => {
-                    return ignoreAfter(replaceAllStr(line, ["export ", "echo $"]), "=");
-                }).join("\n");
-                document.getElementById("result").value = result + "\n";
-            }
-            function parse5(){
-                var text = document.getElementById("text");
-                var result = text.value.split("\n").map(line => {
-                    var key = line.substring(line.indexOf(" ") + 1, line.indexOf("="));
-                    return "export " + key + "=$" + key;
-                }).join("\n");
-                document.getElementById("result").value = result + "\n";
-            }
-            function parse6(){
-                const text = document.getElementById("text");
-                const messages = JSON.parse(text.value);
-                const analytics = {};
-                const analyticsCollection = [];
-                for (let k = 0; k < messages.length; k++) {
-                    if (messages[k].analytics) {
-                        const category = messages[k].analytics.googleAnalyticsClient.categoryEvent;
-                        const action = messages[k].analytics.googleAnalyticsClient.actionEvent;
-                        const chatbotName = messages[k].chatbotName;
-                        if (!analytics[chatbotName]) {
-                            analytics[chatbotName] = {};
-                        }
-                        if (!analytics[chatbotName][category]) {
-                            analytics[chatbotName][category] = [];
-                        }
-                        if (!analytics[chatbotName][category].includes(action)) {
-                            analytics[chatbotName][category].push(action);
-                        }
-                    }
-                }
-                const chatbotNames = Object.keys(analytics);
-                for (let k = 0; k < chatbotNames.length; k++) {
-                    const categoryNames = Object.keys(analytics[chatbotNames[k]]);
-                    for (let m = 0; m < categoryNames.length; m++) {
-                        analyticsCollection.push({
-                            chatbotName: chatbotNames[k],
-                            categoryEvent: categoryNames[m],
-                            actionEvents: analytics[chatbotNames[k]][categoryNames[m]]
-                        });
-                    }
-                }
-                document.getElementById("result").value = JSON.stringify(analyticsCollection);
-            }
-/*
+          }
+        }
+        const chatbotNames = Object.keys(analytics);
+        for (let k = 0; k < chatbotNames.length; k++) {
+          const categoryNames = Object.keys(analytics[chatbotNames[k]]);
+          for (let m = 0; m < categoryNames.length; m++) {
+            analyticsCollection.push({
+              chatbotName: chatbotNames[k],
+              categoryEvent: categoryNames[m],
+              actionEvents: analytics[chatbotNames[k]][categoryNames[m]],
+            });
+          }
+        }
+        document.getElementById("result").value = JSON.stringify(
+          analyticsCollection
+        );
+      }
+      /*
 TEST FUNC 7
 {
     "intents": [
@@ -197,87 +276,107 @@ TEST FUNC 7
     ]
 }
 */
-            function parse7(){
-                const json = JSON.parse(document.getElementById("text").value);
-                const intents = [], intentsMessage = [];
-                const resultObj = { sinMensaje: [], sinIntencion: [] };
-                for (let k = 0; k < json.intents.length; k++) {
-                    intents.push(json.intents[k].action);
-                }
-                for (let k = 0; k < json.intentsMessage.length; k++) {
-                    intentsMessage.push(json.intentsMessage[k].action);
-                }
-                for (let k = 0; k < intents.length; k++) {
-                    if (intentsMessage.indexOf(intents[k]) === -1) {
-                        resultObj.sinMensaje.push(intents[k]);
-                    }
-                }
-                for (let k = 0; k < intentsMessage.length; k++) {
-                    if (intents.indexOf(intentsMessage[k]) === -1) {
-                        resultObj.sinIntencion.push(intentsMessage[k]);
-                    }
-                }
-                document.getElementById("result").value = JSON.stringify(resultObj) + "\n";
-            }
-            function parse8(){
-                const arr = JSON.parse(document.getElementById("text").value);
-                document.getElementById("result").value = arr.join('\n');
-            }
-            function parse9(){
-                const arr = JSON.parse(document.getElementById("text").value);
-                let max = 0, msg = '';
-                for (let k = 0; k < arr.length; k++) {
-                    if (arr[k].length > max) {
-                        max =  arr[k].length;
-                        msg = arr[k];
-                    }
-                }
-                document.getElementById("result").value = msg;
-            }
-            function parse10(){
-                document.getElementById("result").value = `[${document.getElementById("text").value.replace(/\}\n\n\/\* [0-9]+ \*\/\n\{/g, '},{').replace(/^\/\* [0-9]+ \*\/\n/g, '')}]`;
-            }
-            function parse11() {
-                const key = prompt('Wich key?');
-                if (!key) {
-                    return;
-                }
-                document.getElementById("result").value = JSON.stringify(JSON.parse(document.getElementById("text").value).map(obj => obj[key]));
-            }
-            function parse12() {
-                document.getElementById("result").value = JSON.stringify(document.getElementById("text").value.split('\n'));
-            }
-            function parse13() {
-                const splitChar = prompt('Separator');
-                if (!splitChar) {
-                    return;
-                }
-                document.getElementById('result').value = JSON.stringify(document.getElementById('text').value.split('<br>'))
-            }
-            function replaceAll(str, replace){
-                var newStr = "";
-                for(let k = 0; k < str.length; k++){
-                    newStr += str[k] == replace[0] ? replace[1] : str[k];
-                }
-                return newStr;
-            }
-            function replaceAllStr(str, replace){
-                while(str.indexOf(replace[0]) != -1){
-                    str = str.replace(replace[0], replace[1]);
-                }
-                return str;
-            }
-            function ignoreAfter(str, after){
-                var newStr = "";
-                for(var k = 0; str.length; k++){
-                    if(str[k] == after){
-                        break;
-                    }
-                    newStr += str[k];
-                }
-                return newStr;
-            }
-/*
+      function parse7() {
+        const json = JSON.parse(document.getElementById("text").value);
+        const intents = [],
+          intentsMessage = [];
+        const resultObj = { sinMensaje: [], sinIntencion: [] };
+        for (let k = 0; k < json.intents.length; k++) {
+          intents.push(json.intents[k].action);
+        }
+        for (let k = 0; k < json.intentsMessage.length; k++) {
+          intentsMessage.push(json.intentsMessage[k].action);
+        }
+        for (let k = 0; k < intents.length; k++) {
+          if (intentsMessage.indexOf(intents[k]) === -1) {
+            resultObj.sinMensaje.push(intents[k]);
+          }
+        }
+        for (let k = 0; k < intentsMessage.length; k++) {
+          if (intents.indexOf(intentsMessage[k]) === -1) {
+            resultObj.sinIntencion.push(intentsMessage[k]);
+          }
+        }
+        document.getElementById("result").value =
+          JSON.stringify(resultObj) + "\n";
+      }
+      function parse8() {
+        const arr = JSON.parse(document.getElementById("text").value);
+        document.getElementById("result").value = arr.join("\n");
+      }
+      function parse9() {
+        const arr = JSON.parse(document.getElementById("text").value);
+        let max = 0,
+          msg = "";
+        for (let k = 0; k < arr.length; k++) {
+          if (arr[k].length > max) {
+            max = arr[k].length;
+            msg = arr[k];
+          }
+        }
+        document.getElementById("result").value = msg;
+      }
+      function parse10() {
+        document.getElementById("result").value = `[${document
+          .getElementById("text")
+          .value.replace(/\}\n\n\/\* [0-9]+ \*\/\n\{/g, "},{")
+          .replace(/^\/\* [0-9]+ \*\/\n/g, "")}]`;
+      }
+      function parse11() {
+        const key = prompt("Wich key?");
+        if (!key) {
+          return;
+        }
+        document.getElementById("result").value = JSON.stringify(
+          JSON.parse(document.getElementById("text").value).map(
+            (obj) => obj[key]
+          )
+        );
+      }
+      function parse12() {
+        document.getElementById("result").value = JSON.stringify(
+          document.getElementById("text").value.split("\n")
+        );
+      }
+      function parse13() {
+        const splitChar = prompt("Separator");
+        if (!splitChar) {
+          return;
+        }
+        document.getElementById("result").value = JSON.stringify(
+          document.getElementById("text").value.split("<br>")
+        );
+      }
+      function replaceAll(str, replace) {
+        var newStr = "";
+        for (let k = 0; k < str.length; k++) {
+          newStr += str[k] == replace[0] ? replace[1] : str[k];
+        }
+        return newStr;
+      }
+      function replaceAllStr(str, replace) {
+        while (str.indexOf(replace[0]) != -1) {
+          str = str.replace(replace[0], replace[1]);
+        }
+        return str;
+      }
+      function ignoreAfter(str, after) {
+        var newStr = "";
+        for (var k = 0; str.length; k++) {
+          if (str[k] == after) {
+            break;
+          }
+          newStr += str[k];
+        }
+        return newStr;
+      }
+      function parseString() {
+        document.getElementById("result").value = document.getElementById("text").value
+          .replace(/\n/g, "\\n")
+          .replace(/"/g, '\\"')
+          .replace(/\t/g, "\\t");
+      }
+      /*
 // MONGO DB QUERY 1
 var info = db.getCollection('chatbots').find({}, {
         'code': 1,
@@ -309,7 +408,7 @@ for (var k = 0; k < keys.length; k++) {
     );
 }
 */
-/*
+      /*
 // Analytics Pool
 var arr = db.getCollection('analyticpools').find({}).toArray();
 var obj = {};
@@ -318,7 +417,7 @@ for (var k = 0; k < arr.length; k += 1) {
 }
 obj
 */
-/*
+      /*
 // MONGO DB FIELD THAT CONTAINS SOMETHING
 var res = db.getCollection('typescriptwebs').find({}).toArray()
 var vals = [];
@@ -332,6 +431,6 @@ for (var k = 0; k < res.length; k += 1) {
 }
 vals
 */
-        </script>
-    </body>
+    </script>
+  </body>
 </html>
