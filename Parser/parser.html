@@ -17,62 +17,66 @@
       height: 40px;
       font-size: 25px;
       position: absolute;
-      transform: translate(-50%);
     }
     #parse {
-      left: 50%;
+      left: 20%;
       top: 380px;
     }
+    #parse1-1 {
+      left: 80%;
+      top: 380px;
+      transform: translate(-100%);
+    }
     #parse2 {
-      left: 50%;
+      left: 20%;
       top: 430px;
     }
     #parse3 {
-      left: 50%;
+      left: 20%;
       top: 480px;
     }
     #parse4 {
-      left: 50%;
+      left: 20%;
       top: 530px;
     }
     #parse5 {
-      left: 50%;
+      left: 20%;
       top: 580px;
     }
     #parse6 {
-      left: 50%;
+      left: 20%;
       top: 630px;
     }
     #parse7 {
-      left: 50%;
+      left: 20%;
       top: 680px;
     }
     #parse8 {
-      left: 50%;
+      left: 20%;
       top: 680px;
     }
     #parse9 {
-      left: 50%;
+      left: 20%;
       top: 730px;
     }
     #parse10 {
-      left: 50%;
+      left: 20%;
       top: 780px;
     }
     #parse11 {
-      left: 50%;
+      left: 20%;
       top: 830px;
     }
     #parse12 {
-      left: 50%;
+      left: 20%;
       top: 880px;
     }
     #parse13 {
-      left: 50%;
+      left: 20%;
       top: 930px;
     }
     #parse14 {
-      left: 50%;
+      left: 20%;
       top: 980px;
     }
     body {
@@ -85,6 +89,12 @@
     <textarea id="result"></textarea>
     <input type="text" id="excludes" value=" |" />
     <input type="button" onclick="parse();" value="Parse" id="parse" />
+    <input
+      type="button"
+      onclick="parse1_1();"
+      value="JSON to Excel"
+      id="parse1-1"
+    />
     <input type="button" onclick="parse2();" value="Messages" id="parse2" />
     <input type="button" onclick="parse3();" value="Parse 3" id="parse3" />
     <input
@@ -139,6 +149,9 @@
       id="parse14"
     />
     <script type="text/javascript">
+      const Text = document.getElementById`text`;
+      const Result = document.getElementById`result`;
+
       var charChecks = ["{['\"[", "]\"']}"];
       document.getElementById("text").value =
         "Test message number " + charChecks[0] + "5" + charChecks[1];
@@ -371,11 +384,25 @@ TEST FUNC 7
         return newStr;
       }
       function parseString() {
-        document.getElementById("result").value = document.getElementById("text").value
-          .replace(/\n/g, "\\n")
+        document.getElementById("result").value = document
+          .getElementById("text")
+          .value.replace(/\n/g, "\\n")
           .replace(/"/g, '\\"')
           .replace(/\t/g, "\\t");
       }
+      const parse1_1 = () => {
+        const arr = JSON.parse(Text.value);
+        const fields = ["Suministro", "Número"];
+        let value = [];
+        for (let k = 0; k < arr.length; k += 1) {
+          let curr = [];
+          for (let m = 0; m < fields.length; m += 1)
+            curr.push(arr[k][fields[m]]);
+          curr = curr.join("\t");
+          value.push(curr)
+        }
+        Result.value = value.join("\n");
+      };
       /*
 // MONGO DB QUERY 1
 var info = db.getCollection('chatbots').find({}, {
