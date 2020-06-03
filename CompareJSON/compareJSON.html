@@ -63,8 +63,7 @@
   <script type='text/javascript'>
     const text = document.getElementById('text');
     const result = document.getElementById('result');
-    function compareObjects(obj1, obj2, excludeFields) {
-      excludeFields = excludeFields || [];
+    function compareObjects(obj1, obj2, excludeFields = []) {
       if (obj1 instanceof Object && obj2 instanceof Object) {
 
         const keys1 = Object.keys(obj1);
