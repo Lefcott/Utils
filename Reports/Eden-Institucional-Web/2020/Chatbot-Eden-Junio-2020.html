@@ -1,0 +1,398 @@
+<html>
+  <head>
+    <style>
+      table {
+        max-width: 850px;
+        font-family: "Roboto", sans-serif;
+        background-color: #bbb;
+        border-bottom-left-radius: 7px;
+        border-bottom-right-radius: 7px;
+        border-bottom-style: solid;
+        border-bottom-width: 2px;
+        box-shadow: 5px 5px 20px #aaa;
+        margin-bottom: 10px;
+      }
+      table th {
+        background-color: #3d83c4;
+        color: white;
+        text-align: left;
+        font-size: 14px;
+      }
+      table td {
+        color: #525353;
+        text-align: left;
+        font-size: 11px;
+      }
+      .selector {
+        position: absolute;
+        text-align: center;
+        cursor: pointer;
+        border-width: 2px;
+        border-style: solid;
+        border-radius: 6px;
+      }
+      #selectors {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%);
+      }
+      body {
+        background-color: #ddd;
+        overflow: hidden;
+      }
+      .segment {
+        background-color: #000;
+        position: absolute;
+        border-style: solid;
+        border-width: 1px;
+      }
+      #leftSegment {
+        box-shadow: 5px 0px 10px;
+        left: -3px;
+        top: 0;
+        width: 1px;
+        height: 100%;
+      }
+      #rightSegment {
+        box-shadow: -5px 0px 10px;
+        left: 100%;
+        top: 0;
+        width: 1px;
+        height: 100%;
+      }
+      #topSegment {
+        box-shadow: 0px 5px 10px;
+        left: 0;
+        top: -3px;
+        width: 100%;
+        height: 1px;
+      }
+      #bottomSegment {
+        box-shadow: 0px -5px 10px;
+        left: 0;
+        top: 100%;
+        width: 100%;
+        height: 1px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="leftSegment" class="segment"></div>
+    <div id="rightSegment" class="segment"></div>
+    <div id="topSegment" class="segment"></div>
+    <div id="bottomSegment" class="segment"></div>
+    <h1 align="center">Chatbot Eden: junio 2020</h1>
+    <table id="reportTable" align="center">
+      <tr>
+        <th>Intención</th>
+        <th>Consultas</th>
+      </tr>
+      <tr>
+        <td>prueba</td>
+        <td>prueba</td>
+      </tr>
+      <tr>
+        <td>prueba</td>
+        <td>prueba</td>
+      </tr>
+      <tr>
+        <td>prueba</td>
+        <td>prueba</td>
+      </tr>
+    </table>
+    <div id="selectors"></div>
+    <script>
+      const maxRows = 25,
+        table = document.getElementById("reportTable");
+      const buttonWidth = 45,
+        buttonHeight = 20,
+        selectors = document.getElementById("selectors");
+      const unselectedColor = "#888",
+        selectedColor = "#8F8";
+      selectors.style.height = `${buttonHeight}px`;
+      const info = {
+        "negocio.usuario.cambio_titularidad": {
+          count: "231",
+        },
+        "institucional.saludos.hola": {
+          count: "213",
+        },
+        "negocio.usuario.baja_suministro": {
+          count: "214",
+        },
+        "negocio.usuario.baja_oficinavirtual": {
+          count: "85",
+        },
+        "negocio.usuario.atencion_clientes": {
+          count: "158",
+        },
+        "negocio.usuario.costo_conexion": {
+          count: "14",
+        },
+        "negocio.usuario.pago_no_acreditado": {
+          count: "12",
+        },
+        "negocio.usuario.pago_fuera_vencimiento": {
+          count: "86",
+        },
+        "negocio.usuario.que_es_oficinavirtual": {
+          count: "12",
+        },
+        "institucional.saludos.buenas_tardes": {
+          count: "62",
+        },
+        "negocio.usuario.contacto_enre": {
+          count: "2",
+        },
+        "negocio.usuario.saldo_cuenta": {
+          count: "301",
+        },
+        "negocio.usuario.prensa": {
+          count: "1",
+        },
+        "negocio.usuario.oficinas_comerciales": {
+          count: "146",
+        },
+        "negocio.usuario.nuevo_suministro": {
+          count: "642",
+        },
+        "institucional.agente.hablame": {
+          count: "1",
+        },
+        "negocio.usuario.factura_sin_codigo_barras": {
+          count: "15",
+        },
+        "negocio.usuario.reclamo_falta_factura_fisica": {
+          count: "152",
+        },
+        "negocio.usuario.asociar_cuenta_oficinavirtual": {
+          count: "27",
+        },
+        "negocio.usuario.numero_cliente": {
+          count: "246",
+        },
+        "input.unknown": {
+          count: "214",
+        },
+        "institucional.saludos.adios": {
+          count: "55",
+        },
+        "negocio.usuario.registro_electrodependiente": {
+          count: "12",
+        },
+        "negocio.usuario.plazo_rehabilitar_servicio": {
+          count: "44",
+        },
+        "negocio.usuario.recibir_notificaciones": {
+          count: "1",
+        },
+        "institucional.saludos.buenas_noches": {
+          count: "13",
+        },
+        "negocio.usuario.solicitar_corte_por_arreglo": {
+          count: "1",
+        },
+        "negocio.usuario.reclamo_daño_equipos": {
+          count: "26",
+        },
+        "negocio.usuario.censo_de_carga": {
+          count: "16",
+        },
+        "negocio.usuario.informar_pago": {
+          count: "108",
+        },
+        "negocio.usuario.ver_factura_online": {
+          count: "329",
+        },
+        "negocio.usuario.oficina_virtual": {
+          count: "56",
+        },
+        "negocio.usuario.cuadro_tarifario": {
+          count: "2",
+        },
+        "negocio.usuario.fecha_limite_previa_suspension": {
+          count: "13",
+        },
+        "institucional.agente.chatbot": {
+          count: "1",
+        },
+        "negocio.usuario.acerca_eden": {
+          count: "8",
+        },
+        "negocio.usuario.historico_consumos": {
+          count: "19",
+        },
+        "negocio.usuario.debito_automatico": {
+          count: "40",
+        },
+        "negocio.usuario.reclamo_tecnico_falla_externa_transaccion": {
+          count: "143",
+        },
+        "negocio.usuario.obras": {
+          count: "6",
+        },
+        "negocio.usuario.cortes_programados": {
+          count: "53",
+        },
+        "negocio.usuario.estado_web": {
+          count: "36",
+        },
+        "negocio.usuario.pago_tarjeta": {
+          count: "126",
+        },
+        "negocio.usuario.denuncia_robo": {
+          count: "47",
+        },
+        "negocio.usuario.beneficio_jubilados": {
+          count: "3",
+        },
+        "negocio.usuario.descargo_cupon": {
+          count: "15",
+        },
+        "negocio.usuario.notificaciones_oficinavirtual": {
+          count: "4",
+        },
+        "negocio.usuario.finalizar_registracion": {
+          count: "9",
+        },
+        "negocio.usuario.cambio_domicilio_postal": {
+          count: "10",
+        },
+        "institucional.saludos.buenos_dias": {
+          count: "135",
+        },
+        "negocio.usuario.conocer_vencimiento_factura": {
+          count: "156",
+        },
+        "negocio.usuario.medios_contacto": {
+          count: "61",
+        },
+        "negocio.usuario.olvido_contrasenia": {
+          count: "33",
+        },
+        "negocio.usuario.pilar_nuevo_suministro": {
+          count: "36",
+        },
+        "negocio.usuario.cuadro_tarifario_vigente": {
+          count: "16",
+        },
+        "negocio.usuario.aviso_interrupcion_servicio": {
+          count: "1",
+        },
+        "institucional.saludos.gracias": {
+          count: "76",
+        },
+        "negocio.usuario.programa_oficios": {
+          count: "8",
+        },
+        "negocio.usuario.contactar_persona": {
+          count: "255",
+        },
+        "negocio.usuario.registro_oficina_virtual": {
+          count: "390",
+        },
+        "negocio.usuario.no_recibir_notificaciones": {
+          count: "6",
+        },
+        "negocio.usuario.reclamo_comercial": {
+          count: "33",
+        },
+        "negocio.usuario.faturacion_inmueble_vacio": {
+          count: "1",
+        },
+        "negocio.usuario.modificar_datos_comerciales": {
+          count: "26",
+        },
+        "negocio.usuario.electrodomesticos_mayor_consumo": {
+          count: "4",
+        },
+        "negocio.usuario.reclamo_tecnico_falla_externa": {
+          count: "143",
+        },
+        "negocio.usuario.estado_cuenta": {
+          count: "3",
+        },
+        "negocio.usuario.alumbrado_publico_sin_luz": {
+          count: "27",
+        },
+        "institucional.agente.puedes_ayudar": {
+          count: "13",
+        },
+        "negocio.usuario.medios_pago": {
+          count: "288",
+        },
+        "negocio.usuario.peligro_via_publica": {
+          count: "37",
+        },
+        "negocio.usuario.seguridad": {
+          count: "1",
+        },
+        "negocio.usuario.eden_movil": {
+          count: "29",
+        },
+        "negocio.usuario.localidad_eden": {
+          count: "15",
+        },
+        "negocio.usuario.enviar_cv": {
+          count: "33",
+        },
+        "negocio.usuario.reclamo_tecnico_baja_tension": {
+          count: "13",
+        },
+        "negocio.usuario.conocer_estado_tramite": {
+          count: "150",
+        },
+        "negocio.usuario.tarifa_social": {
+          count: "56",
+        },
+        "negocio.usuario.cambio_mail": {
+          count: "13",
+        },
+        "negocio.usuario.simulador_consumo": {
+          count: "9",
+        },
+        "negocio.usuario.reclamo_tecnico": {
+          count: "274",
+        },
+      };
+      function getHMS(seconds) {
+        const hoursR = Math.floor(seconds / 3600);
+        const minutesR = Math.floor((seconds - hoursR * 3600) / 60);
+        const secondsR = Math.floor(seconds - hoursR * 3600 - minutesR * 60);
+        return `${hoursR < 10 ? `0${hoursR}` : hoursR}:${
+          minutesR < 10 ? `0${minutesR}` : minutesR
+        }:${secondsR < 10 ? `0${secondsR}` : secondsR}`;
+      }
+      function updateTable(page) {
+        const keys = Object.keys(info);
+        table.innerHTML = "<tr><th>Intención</th><th>Consultas</th></tr>";
+        const firstRow = (page - 1) * maxRows,
+          lastRow = page * maxRows - 1;
+        for (let k = firstRow; k <= lastRow && info[keys[k]]; k += 1) {
+          table.innerHTML += `
+          <tr>
+            <td>${keys[k]}</td>
+            <td style = 'text-align: center;'>${info[keys[k]].count}</td>
+          </tr>
+        `;
+        }
+        const buttons = Math.ceil(keys.length / maxRows);
+        selectors.style.width = `${buttonWidth * buttons}px`;
+        for (let k = 0; k < buttons; k += 1) {
+          const button = document.createElement("div");
+          button.setAttribute("class", "selector");
+          button.setAttribute("onclick", `updateTable(${k + 1})`);
+          button.setAttribute("onselectstart", `return false;`);
+          button.innerHTML = k + 1;
+          button.style.width = `${buttonWidth}px`;
+          button.style.height = `${buttonHeight}px`;
+          button.style.left = `${buttonWidth * k}px`;
+          button.style.backgroundColor =
+            page === k + 1 ? selectedColor : unselectedColor;
+          selectors.appendChild(button);
+        }
+      }
+      updateTable(1);
+    </script>
+  </body>
+</html>
